@@ -10,6 +10,13 @@ public class Player : NetworkBehaviour{
     private Camera playerCamera;
     private GameObject weaponGameObject;
 
+    [SyncVar]
+    public float speed = 5f;
+    [SyncVar]
+    public float sprintMultiplier = 1.3f;
+    [SyncVar]
+    public float jumpHeight = 5f;
+
     [SyncVar]//Add hook to update various stuff.
     public int health = 100;
     [SyncVar]
