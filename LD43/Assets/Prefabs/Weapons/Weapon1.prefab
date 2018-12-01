@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114349337134503996}
   m_Layer: 0
   m_Name: Weapon1
-  m_TagString: Untagged
+  m_TagString: GUNS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,8 +95,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3651c54b7ae6e45abbc7f00b9eae4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027,
-    type: 2}
   maxLoadedAmmo: 7
   extraAmmo: 21
   unlimitedAmmo: 0

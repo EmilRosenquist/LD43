@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114744516102124354}
   m_Layer: 0
   m_Name: Weapon1
-  m_TagString: Untagged
+  m_TagString: GUNS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 114083699036209870}
   m_Layer: 0
   m_Name: Weapon0
-  m_TagString: Untagged
+  m_TagString: GUNS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

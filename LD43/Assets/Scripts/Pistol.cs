@@ -59,7 +59,7 @@ public class Pistol : Wepond {
             if (loadedAmmo > 0)
             {
                 loadedAmmo--;
-                player.CmdSpawnBullet(0, spawnPos, direction);
+                player.CmdSpawnBullet(0, spawnPos , direction);
                 timer.reset();
             }
             else
@@ -80,6 +80,7 @@ public class Pistol : Wepond {
         reserveAmmo = extraAmmo;
         loadedAmmo = maxLoadedAmmo;
         timer = new Timer(1f);
+        timer.Time = 0f;
 
     }
 

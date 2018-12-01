@@ -7,6 +7,7 @@ public class Timer
     public Timer(float startTime)
     {
         st = startTime;
+        time = st;
     }
     private float time;
     float st;

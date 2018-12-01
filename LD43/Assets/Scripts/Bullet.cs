@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour {
-    float liveTime = 20;
-    float velocity = 10f;
+    float liveTime = 10f;
+    Timer timer;
+    float velocity = 15f;
     Vector3 moveDir = Vector3.forward;
 
     public Vector3 MoveDir
@@ -14,13 +15,28 @@ public class Bullet : MonoBehaviour {
             moveDir = value.normalized;
         }
     }
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start() {
+        timer = new Timer(liveTime);
+
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag != "GUNS")
+        {
+            //Spela upp ljud som indikerar träff
+            Debug.Log(other.tag);
+            Destroy(gameObject);
+        }
+    }
+
+
+    // Update is called once per frame
+    void Update () {
+        if (timer.tick(Time.deltaTime) < 0)
+        {
+            Destroy(gameObject);
+        }
         transform.position = transform.position + moveDir * Time.deltaTime * velocity;
 	}
 }
