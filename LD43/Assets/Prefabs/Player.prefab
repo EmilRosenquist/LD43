@@ -77,6 +77,8 @@ GameObject:
   - component: {fileID: 4093105957836422}
   - component: {fileID: 33207741876935378}
   - component: {fileID: 23424776924731760}
+  - component: {fileID: 114935195470146988}
+  - component: {fileID: 114609880627914898}
   m_Layer: 0
   m_Name: Weapon0
   m_TagString: Untagged
@@ -265,6 +267,27 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1791562993764994}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &114609880627914898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987225748215138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 1
+  m_SendInterval: 0
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114744516102124354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,8 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3651c54b7ae6e45abbc7f00b9eae4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027,
-    type: 2}
   maxLoadedAmmo: 7
   extraAmmo: 21
   unlimitedAmmo: 0
@@ -297,10 +318,47 @@ MonoBehaviour:
   weaponPrefabs:
   - {fileID: 1941717156157758, guid: 7ec9189076c1d2e43b4a977e8e4a034e, type: 2}
   - {fileID: 1852580046986278, guid: cfd3ed166c51c9544a179ee18bf708bf, type: 2}
+  bulletPrefabs:
+  - {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027, type: 2}
   weaponHolder: {fileID: 4875845750354494}
+  speed: 5
+  sprintMultiplier: 1.3
+  jumpHeight: 5
   health: 100
   damageDone: 0
   weaponId: 0
+--- !u!114 &114935195470146988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987225748215138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 89
+    i1: 142
+    i2: 231
+    i3: 238
+    i4: 250
+    i5: 132
+    i6: 195
+    i7: 4
+    i8: 121
+    i9: 85
+    i10: 125
+    i11: 25
+    i12: 172
+    i13: 70
+    i14: 166
+    i15: 2
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114938646708754152
 MonoBehaviour:
   m_ObjectHideFlags: 1

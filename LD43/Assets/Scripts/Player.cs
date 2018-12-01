@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 public class Player : NetworkBehaviour{
     public GameObject playerCameraPrefab;
     public List<GameObject> weaponPrefabs;
+    public List<GameObject> bulletPrefabs;
     public Transform weaponHolder;
     private Camera playerCamera;
     private GameObject weaponGameObject;
@@ -30,13 +31,14 @@ public class Player : NetworkBehaviour{
             return;
         }
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
+        Debug.Log(cameraObject);
         playerCamera = cameraObject.GetComponent<Camera>();
     }
     void Update(){
         if (!isLocalPlayer){
             return;
         }
-        if (Input.GetMouseButton(0)){
+        if (Input.GetMouseButtonDown(0)){
             Attack();
         }else if (Input.GetMouseButtonDown(1)){
             CmdChangeWeapon((weaponId == 0) ? 1 : 0);
@@ -45,13 +47,16 @@ public class Player : NetworkBehaviour{
     void Attack(){
         weaponHolder.GetComponentInChildren<Wepond>().Attack(this, playerCamera.transform.position);
     }
-    [Command]
-    public void CmdTakeDamage(int damageAmount){
-        health -= damageAmount;
+    public void TakeDamage(int damageAmount){
+        if (!isServer)
+            return;
+        this.health -= damageAmount;
     }
     [Command]
-    public void CmdSpawnBullet(GameObject bullet){
-        NetworkServer.Spawn(bullet);
+    public void CmdSpawnBullet(int bulletId, Vector3 spawnPos){
+        GameObject b = Instantiate(bulletPrefabs[0], spawnPos, Quaternion.identity) as GameObject;
+        NetworkServer.Spawn(b);
+        Destroy(b, 3.0f);
     }
     [Command]
     void CmdChangeWeapon(int newId){

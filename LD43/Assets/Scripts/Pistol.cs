@@ -51,13 +51,12 @@ public class Pistol : Wepond {
         return true;
     }
 
-    public override void Attack(Player player, Vector3 spawnPoint)
+    public override void Attack(Player player, Vector3 spawnPos)
     {
         if (loadedAmmo > 0)
         {
             loadedAmmo--;
-            GameObject b = Instantiate(bulletPrefab, spawnPoint, Quaternion.identity) as GameObject;
-            player.CmdSpawnBullet(b);
+            player.CmdSpawnBullet(0, spawnPos);
         }
         else
         {
