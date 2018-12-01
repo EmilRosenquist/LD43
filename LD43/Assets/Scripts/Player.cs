@@ -40,8 +40,6 @@ public class Player : NetworkBehaviour{
     }
     [Command]
     public void CmdSpawnBullet(GameObject bullet){
-        //GameObject b = Instantiate(bullet, playerCamera.transform.position, Quaternion.identity) as GameObject;
-        //Bullet force needs to be added here. aka rigidbody.addforce.
         NetworkServer.Spawn(bullet);
     }
     [Command]
@@ -49,9 +47,8 @@ public class Player : NetworkBehaviour{
         weaponId = newId;
     }
     void OnChangeWeapon(int weaponId){
+        weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
         this.weaponId = weaponId;
-        if (weaponHolder.childCount > 0)
-            Destroy(weaponHolder.GetChild(0).gameObject);
-        Instantiate(weaponPrefabs[weaponId], weaponHolder);
+        weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
     }
 }
