@@ -7,8 +7,11 @@ public class Pistol : Wepond {
     [SerializeField] private int maxLoadedAmmo = 7;
     [SerializeField] private int extraAmmo = 21;
     [SerializeField] private bool unlimitedAmmo = false;
-
+    [SerializeField] private float shootSpeed = 0.3f;
+    [SerializeField] private float reloadSpeed = 1f;
+    private bool reloading = false;
     private Timer timer;
+    private Timer reloadTimer;
 
     public override int CheckMagasine()
     {
@@ -46,41 +49,54 @@ public class Pistol : Wepond {
                 //out of ammo
                 return false;
             }
-            
         }
+        loadedAmmo = maxLoadedAmmo;
+
         return true;
+    }
+    public void StartReload()
+    {
+        reloadTimer.reset();
+        reloading = true;
     }
 
 
     public override void Attack(Player player, Vector3 spawnPos, Vector3 direction)
     {
-        if (timer.tick(Time.deltaTime) < 0)
+        if (!reloading)
         {
-            if (loadedAmmo > 0)
+            if (timer.Time < 0)
             {
-                loadedAmmo--;
-                player.CmdSpawnBullet(0, spawnPos , direction);
-                timer.reset();
-            }
-            else
-            {
-                if (!ReloadAmmo())
+                if (loadedAmmo > 0)
                 {
-                    Debug.Log("ALL OUT OFF AMMO");
+                    loadedAmmo--;
+                    player.CmdSpawnBullet(0, spawnPos, direction);
+                    timer.reset();
                 }
-
+                else
+                {
+                    StartReload();
+                }
             }
         }
     }
     private void Update()
     {
+        if (reloading) reloadTimer.tick(Time.deltaTime);
+        if (reloadTimer.Time < 0)
+        {
+            reloading = false;
+            reloadTimer.reset();
+            ReloadAmmo();
+        }
         timer.tick(Time.deltaTime);
     }
     void Start () {
         reserveAmmo = extraAmmo;
         loadedAmmo = maxLoadedAmmo;
-        timer = new Timer(1f);
+        timer = new Timer(shootSpeed);
         timer.Time = 0f;
+        reloadTimer = new Timer(reloadSpeed);
 
     }
 
