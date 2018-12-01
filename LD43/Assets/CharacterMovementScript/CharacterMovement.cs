@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class CharacterMovement : MonoBehaviour
+public class CharacterMovement : NetworkBehaviour
 {
     [SerializeField]
     private float speed = 5;
@@ -28,8 +28,8 @@ public class CharacterMovement : MonoBehaviour
 
     private void Update()
     {
-        //if (!isLocalPlayer)
-        //    return;
+        if (!isLocalPlayer)
+            return;
 
         if (!cc.isGrounded)
         {
