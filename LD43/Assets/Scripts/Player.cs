@@ -38,14 +38,14 @@ public class Player : NetworkBehaviour{
         if (!isLocalPlayer){
             return;
         }
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButton(0)){
             Attack();
         }else if (Input.GetMouseButtonDown(1)){
             CmdChangeWeapon((weaponId == 0) ? 1 : 0);
         }
     }
     void Attack(){
-        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, playerCamera.transform.position, playerCamera.transform.forward);
+        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, weaponHolder.GetChild(weaponId).transform.position, playerCamera.transform.forward);
     }
     public void TakeDamage(int damageAmount){
         if (!isServer)

@@ -8,7 +8,7 @@ public class Pistol : Wepond {
     [SerializeField] private int extraAmmo = 21;
     [SerializeField] private bool unlimitedAmmo = false;
 
-    private int shotsFired = 0;
+    private Timer timer;
 
     public override int CheckMagasine()
     {
@@ -53,24 +53,29 @@ public class Pistol : Wepond {
 
     public override void Attack(Player player, Vector3 spawnPos, Vector3 direction)
     {
-        if (loadedAmmo > 0)
+        if (timer.tick(Time.deltaTime) < 0)
         {
-            loadedAmmo--;
-            player.CmdSpawnBullet(0, spawnPos, direction);
-        }
-        else
-        {
-            if (!ReloadAmmo())
+            if (loadedAmmo > 0)
             {
-                Debug.Log("ALL OUT OFF AMMO");
+                loadedAmmo--;
+                player.CmdSpawnBullet(0, spawnPos, direction);
+                timer.reset();
             }
+            else
+            {
+                if (!ReloadAmmo())
+                {
+                    Debug.Log("ALL OUT OFF AMMO");
+                }
 
+            }
         }
     }
     
     void Start () {
         reserveAmmo = extraAmmo;
         loadedAmmo = maxLoadedAmmo;
+        timer = new Timer(1f);
 
     }
 
