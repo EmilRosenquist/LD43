@@ -29,24 +29,14 @@ public class Player : NetworkBehaviour{
         if (!isLocalPlayer){
             return;
         }
-        if (Input.GetMouseButtonDown(0)){
+        if (Input.GetMouseButton(0)){
             Attack();
         }else if (Input.GetMouseButtonDown(1)){
             CmdChangeWeapon((weaponId == 0) ? 1 : 0);
         }
     }
     void Attack(){
-        if (true){//Has melee weapon or something special for every weapon maybe
-            //Raycast
-            //If hit,
-            //Get PlayerStats.
-            //Health - Weapon Damage.
- 
-        }
-        else if (true){//Ranged shoot
-            weaponHolder.GetComponentInChildren<Wepond>().Attack(this, playerCamera.transform.position);
-            //CmdSpawnBullet(weapon.bulletTypeOfThisWeapon);
-        }
+        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, playerCamera.transform.position);
     }
     [Command]
     public void CmdSpawnBullet(GameObject bullet){

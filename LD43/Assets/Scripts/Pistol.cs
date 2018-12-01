@@ -56,7 +56,6 @@ public class Pistol : Wepond {
         if (loadedAmmo > 0)
         {
             loadedAmmo--;
-            Debug.Log("PANG " + loadedAmmo + " bullets in magasine");
             GameObject b = Instantiate(bulletPrefab, spawnPoint, Quaternion.identity) as GameObject;
             player.CmdSpawnBullet(b);
         }
