@@ -24,48 +24,103 @@ public class Player : NetworkBehaviour{
     public int damageDone = 0;
     [SyncVar(hook = "OnChangeWeapon")]
     public int weaponId = 0;
-
-    void Start() {
+    [SyncVar]
+    public bool isAlive = true;
+    List<int> ids;
+    void Start() { 
+        ids = new List<int>();
         OnChangeWeapon(weaponId);
         if (!isLocalPlayer){
             return;
         }
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
-        Debug.Log(cameraObject);
         playerCamera = cameraObject.GetComponent<Camera>();
     }
     void Update(){
+        CmdUpdateConnectionsList();
         if (!isLocalPlayer){
             return;
         }
-        if (Input.GetMouseButton(0)){
-            Attack();
-        }else if (Input.GetMouseButtonDown(1)){
-            CmdChangeWeapon((weaponId == 0) ? 1 : 0);
+        if (isAlive){
+            if (Input.GetMouseButton(0)){
+                Attack();
+            }
+            else if (Input.GetMouseButtonDown(1)){
+                CmdChangeWeapon((weaponId == 0) ? 1 : 0);
+            }
+        }else{
+            if (Input.GetMouseButtonDown(1)){
+                NetworkInstanceId test = new NetworkInstanceId((uint)ids[0]);
+
+                GameObject te = NetworkServer.FindLocalObject(test);
+                transform.position = te.transform.position;
+                transform.rotation = te.transform.rotation;
+            }
         }
     }
     void Attack(){
         weaponHolder.GetComponentInChildren<Wepond>().Attack(this, weaponHolder.GetChild(weaponId).transform.position, playerCamera.transform.forward);
     }
-    public void TakeDamage(int damageAmount){
-        if (!isServer)
+    public void TakeDamage(int damageAmount) {
+        Debug.Log("HELLO IM NOT SOMETHING");
+        Debug.Log("THIS IS HEALTH1 : " + health);
+        if (!isServer) {
+            CmdTakeDamage(damageAmount);
             return;
+        }
+
+        health -= damageAmount;
+        Debug.Log("THIS IS HEALTH13 : " + health);
+        /*if(health <= 0){
+            isAlive = false;
+            ToggleSpecatorMode(false);
+            Debug.Log("Dead!");
+        }*/
+    }
+    [Command]
+    public void CmdTakeDamage(int damageAmount){
+        Debug.Log("HELLO IM SERVER");
+        Debug.Log("THIS IS HEALTH : " + health);
         this.health -= damageAmount;
     }
     [Command]
     public void CmdSpawnBullet(int bulletId, Vector3 spawnPos, Vector3 direction){
-        GameObject b = Instantiate(bulletPrefabs[0], spawnPos, Quaternion.identity) as GameObject;
+        RpcSpawnBullet(bulletId, spawnPos, direction);
+    }
+    [ClientRpc]
+    void RpcSpawnBullet(int bulletId, Vector3 spawnPos, Vector3 direction){
+        GameObject b = Instantiate(bulletPrefabs[bulletId], spawnPos, Quaternion.identity) as GameObject;
         b.GetComponentInChildren<Bullet>().MoveDir = direction;
-        NetworkServer.Spawn(b);
         Destroy(b, 3.0f);
     }
     [Command]
     void CmdChangeWeapon(int newId){
         weaponId = newId;
     }
+    [Command]
+    void CmdUpdateConnectionsList(){
+        int[] ids = new int[NetworkServer.connections.Count];
+        for (int i = 0; i < NetworkServer.connections.Count; i++)
+            ids[i] = NetworkServer.connections[i].connectionId;
+        RpcUpdateConnectionList(ids);
+    }
+    [ClientRpc]
+    void RpcUpdateConnectionList(int[] list) {
+        if (ids != null) {
+            ids.Clear();
+            ids.AddRange(list);
+        }
+    }
     void OnChangeWeapon(int weaponId){
         weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
         this.weaponId = weaponId;
         weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
+    }
+    void ToggleSpecatorMode(bool toggle){
+        isAlive = toggle;
+        transform.GetChild(0).gameObject.SetActive(toggle);
+        GetComponent<CharacterController>().enabled = toggle;
+        GetComponent<MeshRenderer>().enabled = toggle;
+        GetComponent<CapsuleCollider>().enabled = toggle;
     }
 }

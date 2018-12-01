@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour {
     float liveTime = 10f;
     Timer timer;
     float velocity = 15f;
-    Vector3 moveDir = Vector3.forward;
+    Vector3 moveDir = Vector3.up;
 
     public Vector3 MoveDir
     {
@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour {
         {
             //Spela upp ljud som indikerar träff
             Debug.Log(other.tag);
+            other.gameObject.GetComponent<Player>().TakeDamage(20);
             Destroy(gameObject);
         }
     }
