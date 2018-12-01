@@ -8,7 +8,7 @@ public abstract class Wepond : MonoBehaviour {
     protected bool infiniteAmmo = false;
     protected int loadedAmmo;
 
-    public abstract void Attack(Player player, Vector3 spawnPos);
+    public abstract void Attack(Player player, Vector3 spawnPos, Vector3 direction);
     public abstract bool ReloadAmmo();
     public abstract int CheckMagasine();
     public abstract int CheckTotalBullets();

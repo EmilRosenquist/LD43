@@ -51,12 +51,12 @@ public class Pistol : Wepond {
         return true;
     }
 
-    public override void Attack(Player player, Vector3 spawnPos)
+    public override void Attack(Player player, Vector3 spawnPos, Vector3 direction)
     {
         if (loadedAmmo > 0)
         {
             loadedAmmo--;
-            player.CmdSpawnBullet(0, spawnPos);
+            player.CmdSpawnBullet(0, spawnPos, direction);
         }
         else
         {

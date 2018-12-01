@@ -45,7 +45,7 @@ public class Player : NetworkBehaviour{
         }
     }
     void Attack(){
-        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, playerCamera.transform.position);
+        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, playerCamera.transform.position, playerCamera.transform.forward);
     }
     public void TakeDamage(int damageAmount){
         if (!isServer)
@@ -53,8 +53,9 @@ public class Player : NetworkBehaviour{
         this.health -= damageAmount;
     }
     [Command]
-    public void CmdSpawnBullet(int bulletId, Vector3 spawnPos){
+    public void CmdSpawnBullet(int bulletId, Vector3 spawnPos, Vector3 direction){
         GameObject b = Instantiate(bulletPrefabs[0], spawnPos, Quaternion.identity) as GameObject;
+        b.GetComponentInChildren<Bullet>().MoveDir = direction;
         NetworkServer.Spawn(b);
         Destroy(b, 3.0f);
     }
