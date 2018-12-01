@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4884453808237726}
   - component: {fileID: 33502867744218746}
   - component: {fileID: 23856049085166774}
-  - component: {fileID: 114373613577999938}
+  - component: {fileID: 114812826846277572}
   m_Layer: 0
   m_Name: Weapon0
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1941717156157758}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &114373613577999938
+--- !u!114 &114812826846277572
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,11 +92,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1941717156157758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef3651c54b7ae6e45abbc7f00b9eae4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 42408125ede51a14fa3f2a7366556ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027,
-    type: 2}
-  maxLoadedAmmo: 7
-  extraAmmo: 21
-  unlimitedAmmo: 0
+  targetDistance: 0
+  maxDistance: 10
