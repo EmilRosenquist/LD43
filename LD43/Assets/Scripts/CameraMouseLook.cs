@@ -4,24 +4,29 @@ using UnityEngine;
 
 public class CameraMouseLook : MonoBehaviour {
 
+    public bool cursorLocked;
+
     public float sensitivity;
     public float smoothing;
     public int minY;
     public int maxY;
+    
 
     Vector2 mouseLook;
-    Vector2 smoothV;
+    //Vector2 smoothV;
     GameObject character;
 
-	// Use this for initialization
+
 	void Start ()
     {
-        character = this.transform.parent.gameObject;
-	}
+        character = this.transform.parent.gameObject;       
+    }
 	
-	// Update is called once per frame
 	void Update ()
     {
+        SetCursorState();
+
+
 		Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")); //mus-input
 
         mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity * smoothing, sensitivity * smoothing));
@@ -37,5 +42,11 @@ public class CameraMouseLook : MonoBehaviour {
 
         transform.localRotation = Quaternion.AngleAxis(-mouseLook.y, Vector3.right); //kameran roterar runt x-axeln
         character.transform.localRotation = Quaternion.AngleAxis(mouseLook.x, character.transform.up); //karaktär och kamera rotera runt y-axel
+    }
+
+    void SetCursorState()
+    {
+        if (cursorLocked == true)
+            Cursor.lockState = CursorLockMode.Locked;
     }
 }
