@@ -51,6 +51,7 @@ public class Pistol : Wepond {
         return true;
     }
 
+
     public override void Attack(Player player, Vector3 spawnPos, Vector3 direction)
     {
         if (timer.tick(Time.deltaTime) < 0)
@@ -71,7 +72,10 @@ public class Pistol : Wepond {
             }
         }
     }
-    
+    private void Update()
+    {
+        timer.tick(Time.deltaTime);
+    }
     void Start () {
         reserveAmmo = extraAmmo;
         loadedAmmo = maxLoadedAmmo;

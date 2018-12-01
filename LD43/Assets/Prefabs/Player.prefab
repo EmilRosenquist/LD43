@@ -66,7 +66,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1987225748215138
 GameObject:
   m_ObjectHideFlags: 1
@@ -309,7 +309,8 @@ MonoBehaviour:
   weaponPrefabs:
   - {fileID: 1941717156157758, guid: 7ec9189076c1d2e43b4a977e8e4a034e, type: 2}
   - {fileID: 1852580046986278, guid: cfd3ed166c51c9544a179ee18bf708bf, type: 2}
-  bulletPrefabs: []
+  bulletPrefabs:
+  - {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027, type: 2}
   weaponHolder: {fileID: 4875845750354494}
   speed: 5
   sprintMultiplier: 1.3
