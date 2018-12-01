@@ -41,15 +41,18 @@ public class Player : NetworkBehaviour{
             //If hit,
             //Get PlayerStats.
             //Health - Weapon Damage.
-        }else if (true){//Ranged shoot
+ 
+        }
+        else if (true){//Ranged shoot
+            weaponHolder.GetComponentInChildren<Wepond>().Attack(this, playerCamera.transform.position);
             //CmdSpawnBullet(weapon.bulletTypeOfThisWeapon);
         }
     }
     [Command]
-    void CmdSpawnBullet(GameObject bullet){
-        GameObject b = Instantiate(bullet, playerCamera.transform.position, Quaternion.identity) as GameObject;
+    public void CmdSpawnBullet(GameObject bullet){
+        //GameObject b = Instantiate(bullet, playerCamera.transform.position, Quaternion.identity) as GameObject;
         //Bullet force needs to be added here. aka rigidbody.addforce.
-        NetworkServer.Spawn(b);
+        NetworkServer.Spawn(bullet);
     }
     [Command]
     void CmdChangeWeapon(int newId){
