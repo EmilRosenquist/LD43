@@ -5,10 +5,16 @@ using UnityEngine.Networking;
 
 public class CharacterMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 5;
-    [SerializeField] private float airStrafeSpeed = 1.3f;
-    [SerializeField] private float g = -9.82f;
-    [SerializeField] private float jumpHeight = 10;
+    [SerializeField]
+    private float speed = 5;
+    [SerializeField]
+    private float airStrafeSpeed = 1.3f;
+    [SerializeField]
+    private float sprintMultiplier = 1.3f;
+    [SerializeField]
+    private float g = -9.82f;
+    [SerializeField]
+    private float jumpHeight = 10;
     private CharacterController cc;
 
     private Vector3 velocity = Vector3.zero;
@@ -41,11 +47,13 @@ public class CharacterMovement : MonoBehaviour
 
     void GetGroundMovement()
     {
+        float sprint = 1.0f;
+        if (Input.GetKey(KeyCode.LeftShift)) sprint = sprintMultiplier;
         Vector2 move;
         move.x = Input.GetAxisRaw("Horizontal");
         move.y = Input.GetAxisRaw("Vertical");
-        velocity.x = move.normalized.x * speed;
-        velocity.z = move.normalized.y * speed;
+        velocity.x = move.normalized.x * speed * sprint;
+        velocity.z = move.normalized.y * speed * sprint;
     }
 
     void GetAirMovement()
@@ -53,7 +61,7 @@ public class CharacterMovement : MonoBehaviour
         Vector2 VelocityXZ = new Vector2(velocity.x, velocity.z);
         Vector2 airStrafeVelocity = Vector2.zero;
 
-        if(velocity.x >= 0 && Input.GetAxis("Horizontal") < 0 || velocity.x <= 0 && Input.GetAxis("Horizontal") > 0 || velocity.magnitude < speed)
+        if (velocity.x >= 0 && Input.GetAxis("Horizontal") < 0 || velocity.x <= 0 && Input.GetAxis("Horizontal") > 0 || velocity.magnitude < speed)
         {
             airStrafeVelocity.x = Input.GetAxis("Horizontal");
         }
@@ -84,5 +92,6 @@ public class CharacterMovement : MonoBehaviour
     {
         velocity = transform.TransformDirection(velocity);
         cc.Move(velocity * Time.deltaTime);
+        Debug.Log(cc.velocity);
     }
 }
