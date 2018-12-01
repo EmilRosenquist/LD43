@@ -92,6 +92,5 @@ public class CharacterMovement : NetworkBehaviour
     {
         velocity = transform.TransformDirection(velocity);
         cc.Move(velocity * Time.deltaTime);
-        Debug.Log(cc.velocity);
     }
 }

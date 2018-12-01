@@ -11,6 +11,21 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1791562993764994}
   m_IsPrefabAsset: 1
+--- !u!1 &1278574404727384
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4875845750354494}
+  m_Layer: 0
+  m_Name: WeaponHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1791562993764994
 GameObject:
   m_ObjectHideFlags: 0
@@ -44,8 +59,22 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4875845750354494}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4875845750354494
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1278574404727384}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4732219537100946}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23147417282852612
@@ -102,6 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  damageDone: 0
+  weaponId: 0
 --- !u!114 &114779252789349428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,8 +144,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02b77f89c893c954bbc5f8e83d96eecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 1247865985724976, guid: a8cfd89f982d47940ac4cac4b183dad0,
+  playerCameraPrefab: {fileID: 1247865985724976, guid: a8cfd89f982d47940ac4cac4b183dad0,
     type: 2}
+  weaponPrefabs:
+  - {fileID: 1941717156157758, guid: 7ec9189076c1d2e43b4a977e8e4a034e, type: 2}
+  - {fileID: 1852580046986278, guid: cfd3ed166c51c9544a179ee18bf708bf, type: 2}
+  weaponHolder: {fileID: 4875845750354494}
+  health: 100
+  damageDone: 0
+  weaponId: 0
 --- !u!114 &114938646708754152
 MonoBehaviour:
   m_ObjectHideFlags: 1
