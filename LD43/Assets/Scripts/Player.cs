@@ -46,8 +46,8 @@ public class Player : NetworkBehaviour{
         weaponHolder.GetComponentInChildren<Wepond>().Attack(this, playerCamera.transform.position);
     }
     [Command]
-    void TakeDamage(int damageAmount){
-        //Fixa soon
+    public void CmdTakeDamage(int damageAmount){
+        health -= damageAmount;
     }
     [Command]
     public void CmdSpawnBullet(GameObject bullet){
