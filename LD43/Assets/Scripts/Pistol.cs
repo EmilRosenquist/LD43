@@ -12,7 +12,7 @@ public class Pistol : Wepond {
     private bool reloading = false;
     private Timer timer;
     private Timer reloadTimer;
-
+    Animator am;
     public override int CheckMagasine()
     {
         return loadedAmmo;
@@ -90,6 +90,11 @@ public class Pistol : Wepond {
             ReloadAmmo();
         }
         timer.tick(Time.deltaTime);
+
+        if (am)
+        {
+            am.SetInteger("Bullets", loadedAmmo);
+        }
     }
     void Start () {
         reserveAmmo = extraAmmo;
@@ -97,7 +102,7 @@ public class Pistol : Wepond {
         timer = new Timer(shootSpeed);
         timer.Time = 0f;
         reloadTimer = new Timer(reloadSpeed);
-
+        am = GetComponent<Animator>();
     }
 
 
