@@ -18,7 +18,7 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private float buyTime;
     public List<GameObject> playerList = new List<GameObject>();
     public List<GameObject> aliveList = new List<GameObject>();
-    private Timer buyTimer;
+    private Timer buyTimer = new Timer(0);
 
     [SyncVar]
     states currentState = states.PREGAME;
@@ -159,7 +159,7 @@ public class GameManager : NetworkBehaviour
             newPos = spawnpoints[Random.Range(0, spawnpoints.Length)].transform.position;
             playerList[i].transform.position = newPos;
             playerList[i].GetComponent<Player>().CmdToggleSpectatorMode(true);
-            
+            playerList[i].GetComponent<Player>().CmdResetStats();
         }
     }
 

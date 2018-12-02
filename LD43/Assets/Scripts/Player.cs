@@ -124,4 +124,8 @@ public class Player : NetworkBehaviour{
         GetComponent<CharacterController>().enabled = toggle;
         GetComponentInChildren<SkinnedMeshRenderer>().enabled = toggle;
     }
+    [Command]
+    public void CmdResetStats(){
+        health = 100;
+    }
 }
