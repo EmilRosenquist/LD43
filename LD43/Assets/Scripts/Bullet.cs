@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour {
             if (other.gameObject.GetComponent<Player>() != null)
             {
                 other.gameObject.GetComponent<Player>().TakeDamage(dmg);
-                shooter.CmdDidDamage(dmg);
+                shooter.DidDamage(dmg);
             }
             Destroy(gameObject);
         }

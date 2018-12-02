@@ -66,7 +66,6 @@ public class Player : NetworkBehaviour{
     }
     public void TakeDamage(int damageAmount) {
         if (!isServer) {
-            CmdTakeDamage(damageAmount);
             return;
         }
         health -= damageAmount;
@@ -80,8 +79,9 @@ public class Player : NetworkBehaviour{
     public void CmdTakeDamage(int damageAmount){
         this.health -= damageAmount;
     }
-    [Command]
-    public void CmdDidDamage(int amount){
+    public void DidDamage(int amount){
+        if (!isServer)
+            return;
         damageDone += amount;
     }
     [Command]
