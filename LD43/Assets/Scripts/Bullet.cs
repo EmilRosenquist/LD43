@@ -30,8 +30,8 @@ public class Bullet : MonoBehaviour {
         if (!hasHit && other.gameObject.GetComponentInParent<Player>() != null && other.gameObject.GetComponentInParent<Player>() != shooter)
         {
             hasHit = true;
-            other.gameObject.GetComponentInParent<Player>().TakeDamage(dmg);
-            shooter.DidDamage(dmg);
+            other.gameObject.GetComponentInParent<Player>().TakeDamage((int)(dmg * shooter.damageMultiplier));
+            shooter.DidDamage((int)(dmg * shooter.damageMultiplier));
         }
         if (other.gameObject.GetComponentInParent<Player>() == null){
             Destroy(gameObject);
