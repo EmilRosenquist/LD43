@@ -62,4 +62,9 @@ public class Grenade : Wepond {
             gameObject.SetActive(false);
         }
     }
+
+    public override void Reset()
+    {
+        return;
+    }
 }
