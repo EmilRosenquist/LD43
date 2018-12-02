@@ -3,15 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RailGun : Wepond {
-    [SerializeField] private int maxLoadedAmmo = 1;
-    [SerializeField] private int extraAmmo = 5;
-    [SerializeField] private bool unlimitedAmmo = false;
-    [SerializeField] private float shootSpeed = 3f;
-    private bool reloading = false;
+    private int maxLoadedAmmo = 5;
+
+    private float shootSpeed = 2f;
+    
     private Timer timer;
 
     public override void Attack(Player player, Vector3 spawnPos, Vector3 direction)
     {
+        if (timer.Time < 0)
+        {
+            Debug.Log(loadedAmmo);
+            if (loadedAmmo > 0)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(spawnPos, direction * 15f, out hit))
+                {
+                    //player.CmdSpawnRail(1, spawnPos, hit.point);
+                }
+                //player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 15f);
+                timer.reset();
+                loadedAmmo--;
+                //FindObjectOfType<ObjectSpawner>().RpcSpawnObject(0, transform.position);
+                Debug.Log("Hora");
+            }
+        }
     }
 
     public override int CheckMagasine()
@@ -29,13 +45,21 @@ public class RailGun : Wepond {
         return true;
     }
 
+
     // Use this for initialization
     void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        loadedAmmo = maxLoadedAmmo;
+        timer = new Timer(shootSpeed);
+        timer.Time = -1;
+        
+    }
+
+    // Update is called once per frame
+    void Update() {
+        if (timer.Time > 0)
+        {
+            timer.tick(Time.deltaTime);
+        }
+    
 	}
 }

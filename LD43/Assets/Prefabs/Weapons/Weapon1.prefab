@@ -48,7 +48,7 @@ MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1852580046986278}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -98,3 +98,5 @@ MonoBehaviour:
   maxLoadedAmmo: 7
   extraAmmo: 21
   unlimitedAmmo: 0
+  shootSpeed: 0.3
+  reloadSpeed: 1

@@ -26,7 +26,10 @@ public class Bullet : MonoBehaviour {
         {
             //Spela upp ljud som indikerar träff
             Debug.Log(other.tag);
-            other.gameObject.GetComponent<Player>().TakeDamage(20);
+            if (other.gameObject.GetComponent<Player>() != null)
+            {
+                other.gameObject.GetComponent<Player>().TakeDamage(20);
+            }
             Destroy(gameObject);
         }
     }

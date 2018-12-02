@@ -29,12 +29,19 @@ public class Player : NetworkBehaviour{
     List<int> ids;
     void Start() { 
         ids = new List<int>();
-        OnChangeWeapon(weaponId);
         if (!isLocalPlayer){
             return;
         }
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
         playerCamera = cameraObject.GetComponent<Camera>();
+        for(int i = 0; i < weaponPrefabs.Count; i++)
+        {
+            GameObject g = Instantiate(weaponPrefabs[i], weaponHolder);
+            g.SetActive(false);
+        }
+        weaponHolder.GetChild(0).gameObject.SetActive(true);
+        OnChangeWeapon(weaponId);
+
     }
     void Update(){
         CmdUpdateConnectionsList();

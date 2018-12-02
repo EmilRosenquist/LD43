@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 
 public class CharacterMovement : NetworkBehaviour
 {
-
+    private Animator am;
     private float g = -15f;
     private CharacterController cc;
 
@@ -15,6 +15,7 @@ public class CharacterMovement : NetworkBehaviour
 
     private void Start()
     {
+        am = GetComponentInChildren<Animator>();
         cc = GetComponent<CharacterController>();
         player = gameObject.GetComponent<Player>();
     }
@@ -22,6 +23,7 @@ public class CharacterMovement : NetworkBehaviour
 
     private void Update()
     {
+        am.SetFloat("MoveSpeed", cc.velocity.magnitude);
         if (!isLocalPlayer)
             return;
 
