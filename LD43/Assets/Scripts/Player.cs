@@ -108,6 +108,7 @@ public class Player : NetworkBehaviour{
     {
         GameObject b = Instantiate(bulletPrefabs[bulletId], spawnPos, Quaternion.identity) as GameObject;
         b.GetComponent<RailBullet>().setPositions(spawnPos, endPos);
+        b.GetComponentInChildren<Bullet>().shooter = this;
         Destroy(b, 3.0f);
     }
     [Command]
