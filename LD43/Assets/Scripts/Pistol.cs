@@ -109,7 +109,12 @@ public class Pistol : Wepond {
         am = GetComponent<Animator>();
     }
 
-
-
-
+    public override void Reset()
+    {
+        reserveAmmo = extraAmmo;
+        loadedAmmo = maxLoadedAmmo;
+        timer = new Timer(shootSpeed);
+        timer.Time = 0f;
+        reloadTimer = new Timer(reloadSpeed);
+    }
 }

@@ -101,4 +101,10 @@ public class AutoRifle : Wepond
     {
         return loadedAmmo + reserveAmmo;
     }
+
+    public override void Reset()
+    {
+        reserveAmmo = extraAmmo;
+        loadedAmmo = maxLoadedAmmo;
+    }
 }

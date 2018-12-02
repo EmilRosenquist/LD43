@@ -12,4 +12,5 @@ public abstract class Wepond : MonoBehaviour {
     public abstract bool ReloadAmmo();
     public abstract int CheckMagasine();
     public abstract int CheckTotalBullets();
+    public abstract void Reset();
 }

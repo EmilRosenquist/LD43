@@ -50,6 +50,11 @@ public class Knife : Wepond {
         throw new System.NotImplementedException();
     }
 
+    public override void Reset()
+    {
+        throw new System.NotImplementedException();
+    }
+
     // Use this for initialization
     void Start () {
 		

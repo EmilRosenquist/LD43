@@ -47,6 +47,13 @@ public class RailGun : Wepond {
         return true;
     }
 
+    public override void Reset()
+    {
+        loadedAmmo = maxLoadedAmmo;
+        timer = new Timer(shootSpeed);
+        timer.Time = -1;
+    }
+
 
     // Use this for initialization
     void Start () {

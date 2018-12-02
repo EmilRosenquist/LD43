@@ -21,7 +21,7 @@ public class PlayerScoreScreen : MonoBehaviour {
         
         if (gm)
         {
-            nameText.text = "spelare: " + IDtoTrack;
+            nameText.text = "spelare: " + IDtoTrack ;
             for(int i = 0; i < gm.playerList.Count; i++)
             {
                 if(IDtoTrack == gm.playerList[i].GetComponent<Player>().netId)
