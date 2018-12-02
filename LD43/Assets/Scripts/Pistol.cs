@@ -113,6 +113,7 @@ public class Pistol : Wepond {
     {
         reserveAmmo = extraAmmo;
         loadedAmmo = maxLoadedAmmo;
+        am.SetInteger("Bullets", maxLoadedAmmo);
         timer = new Timer(shootSpeed);
         timer.Time = 0f;
         reloadTimer = new Timer(reloadSpeed);
