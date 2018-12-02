@@ -135,6 +135,23 @@ public class Player : NetworkBehaviour{
         b.GetComponentInChildren<Bullet>().shooter = this;
         Destroy(b, 3.0f);
     }
+
+    [Command]
+    public void CmdSpawnGranade(int bulletId, Vector3 spawnPos, Vector3 force, Vector3 tourqe, Quaternion rot)
+    {
+        RpcSpawnGranade(bulletId, spawnPos, force, tourqe, rot);
+    }
+
+    [ClientRpc]
+    void RpcSpawnGranade(int bulletId, Vector3 spawnPos, Vector3 force, Vector3 tourqen, Quaternion rot)
+    {
+        GameObject b = Instantiate(bulletPrefabs[bulletId], spawnPos, rot) as GameObject;
+        b.GetComponent<Rigidbody>().AddForce(force);
+        b.GetComponent<Rigidbody>().AddTorque(tourqen);
+        b.GetComponent<GrenadeProjectile>().shooter = this;
+        //Destroy(b, 3.0f);
+    }
+
     [Command]
     public void CmdSpawnRail(int bulletId, Vector3 spawnPos, Vector3 endPos)
     {

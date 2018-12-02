@@ -11,6 +11,8 @@ public class GrenadeExplosion : MonoBehaviour {
 
     private int nrRepeat = 1;
 
+    List<Player> players = new List<Player>();
+
 	// Use this for initialization
 	void Start ()
     {
@@ -26,30 +28,39 @@ public class GrenadeExplosion : MonoBehaviour {
         if (explosion.isPlaying)
             gameObject.SetActive(true);
         else
-            gameObject.SetActive(false);
+            Destroy(gameObject);
 	}
 
     public void ExplosionDamage()
     {
-        if (nrRepeat > 0) //do following once only
+        //if (nrRepeat > 0) //do following once only
+        //{
+        Collider[] hitColliders;
+        hitColliders = Physics.OverlapSphere(transform.position, radius);
+
+        for (int i = 0; i < hitColliders.Length; i++)
         {
-            Collider[] hitColliders;
-            hitColliders = Physics.OverlapSphere(transform.position, radius);
 
-            for (int i = 0; i < hitColliders.Length; i++)
+            Debug.Log(hitColliders[i].gameObject.name);
+            GameObject hitGameObject = hitColliders[i].transform.gameObject;
+            if (hitGameObject.GetComponent<Player>())
             {
-                Debug.Log(hitColliders[i].gameObject.name);
-                GameObject hitGameObject = hitColliders[i].transform.gameObject;
-
-                if (hitGameObject.GetComponent<MyPlayer>() != null)
+                Player p = hitGameObject.GetComponent<Player>();
+                if (!players.Contains(p))
                 {
-                    MyPlayer hitPlayer = hitGameObject.GetComponent<MyPlayer>();
-
-                    hitPlayer.TakeDamage(damage);
+                    p.TakeDamage(damage);
+                    players.Add(p);
                 }
-
-                nrRepeat = -10; //never do above again
             }
+            //if (hitGameObject.GetComponent<MyPlayer>() != null)
+            //{
+            //    MyPlayer hitPlayer = hitGameObject.GetComponent<MyPlayer>();
+
+            //    hitPlayer.TakeDamage(damage);
+            //}
+
+            //    nrRepeat = -10; //never do above again
+            //}
         }
     }
 

@@ -4776,10 +4776,12 @@ MonoBehaviour:
     type: 2}
   weaponPrefabs:
   - {fileID: 1073120281609738, guid: 76151c446716533428658372580c1420, type: 2}
-  - {fileID: 1131140743410904, guid: f30715499fc1c9a4bbf1212f4af5dbb1, type: 2}
+  - {fileID: 1039355638354694, guid: 980a050af23e56e43acae77c78d4b927, type: 2}
+  - {fileID: 1039355638354694, guid: 980a050af23e56e43acae77c78d4b927, type: 2}
   bulletPrefabs:
   - {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027, type: 2}
   - {fileID: 1912327147758926, guid: 90cad53e30ef7354681cc9d9c318fec1, type: 2}
+  - {fileID: 1594363238387888, guid: a9855ae08491b9c4c966ed5a53e599b3, type: 2}
   skins:
   - {fileID: 2800000, guid: ad8c779111767c34b9e2a33f8854375f, type: 3}
   - {fileID: 2800000, guid: 8f8b5039d32d69341bccb4111f374eea, type: 3}
@@ -4787,11 +4789,19 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 223dd090b7ff3df44bd21b93789d74de, type: 3}
   - {fileID: 2800000, guid: 0be420d0c5b4e1d4cb25347a2128b4bc, type: 3}
   weaponHolder: {fileID: 4875845750354494}
-  speed: 5
-  sprintMultiplier: 1.3
-  jumpHeight: 5
-  skinIndex: 0
   health: 100
+  baseHealth: 100
+  speed: 5
+  baseSpeed: 5
+  sprintMultiplier: 1.3
+  baseSprintMultiplier: 1.3
+  jumpHeight: 5
+  baseJumpHeight: 5
+  damageMultiplier: 1
+  money: 0
+  moneyMultiplier: 1
+  skinIndex: 0
+  playerName: 
   damageDone: 0
   weaponId: 0
   isAlive: 1

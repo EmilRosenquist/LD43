@@ -86,6 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 198984230920435500}
   radius: 5
+  damage: 30
 --- !u!198 &198933311115898878
 ParticleSystem:
   m_ObjectHideFlags: 1
