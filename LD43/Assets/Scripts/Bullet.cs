@@ -9,21 +9,18 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private int dmg = 25;
     Vector3 moveDir = Vector3.up;
     public Player shooter;
-    private Rigidbody rb;
+    private bool isHit = false;
 
     public Vector3 MoveDir
     {
         set
         {
             moveDir = value.normalized;
-            rb = GetComponent<Rigidbody>();
-            rb.velocity = moveDir * velocity;
         }
     }
     // Use this for initialization
     void Start() {
         timer = new Timer(liveTime);
-        rb = GetComponent<Rigidbody>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -43,12 +40,23 @@ public class Bullet : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update () {
-        if (timer.tick(Time.deltaTime) < 0)
+    void FixedUpdate () {
+        if (timer.tick(Time.fixedDeltaTime) < 0)
         {
             Destroy(gameObject);
         }
         //transform.position = transform.position + moveDir * Time.deltaTime * velocity;
-
+        if (!isHit){
+            Ray ray = new Ray(transform.position, moveDir);
+            RaycastHit hit;
+            string[] layers = new string[1];
+            layers[0] = "Default";
+            if (Physics.Raycast(ray, out hit, velocity * Time.fixedDeltaTime, LayerMask.GetMask(layers))){
+                transform.position = hit.point;
+                isHit = true;
+            }else{
+                transform.position = transform.position + moveDir * velocity * Time.fixedDeltaTime;
+            }
+        }
 	}
 }
