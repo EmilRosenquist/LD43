@@ -9,23 +9,26 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private int dmg = 25;
     Vector3 moveDir = Vector3.up;
     public Player shooter;
+    private Rigidbody rb;
 
     public Vector3 MoveDir
     {
         set
         {
             moveDir = value.normalized;
+            rb = GetComponent<Rigidbody>();
+            rb.velocity = moveDir * velocity;
         }
     }
     // Use this for initialization
     void Start() {
         timer = new Timer(liveTime);
-
+        rb = GetComponent<Rigidbody>();
     }
     private void OnTriggerEnter(Collider other)
     {
         //Spela upp ljud som indikerar träff
-        Debug.Log(other.tag);
+        Debug.Log(other.gameObject.name);
         if (other.gameObject.GetComponent<Player>() != null && other.gameObject.GetComponent<Player>() != shooter)
         {
             other.gameObject.GetComponent<Player>().TakeDamage(dmg);
@@ -45,6 +48,7 @@ public class Bullet : MonoBehaviour {
         {
             Destroy(gameObject);
         }
-        transform.position = transform.position + moveDir * Time.deltaTime * velocity;
+        //transform.position = transform.position + moveDir * Time.deltaTime * velocity;
+
 	}
 }

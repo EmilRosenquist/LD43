@@ -101,8 +101,6 @@ public class GameManager : NetworkBehaviour
 
 
 
-            Debug.Log(currentState);
-
 
 
 

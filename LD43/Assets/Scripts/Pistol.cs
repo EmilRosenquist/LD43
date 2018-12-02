@@ -34,13 +34,11 @@ public class Pistol : Wepond {
                 {
                     reserveAmmo -= maxLoadedAmmo;
                     loadedAmmo = maxLoadedAmmo;
-                    Debug.Log("Reserve Ammo: " + reserveAmmo);
                 }
                 else
                 {
                     loadedAmmo = reserveAmmo;
                     reserveAmmo = 0;
-                    Debug.Log("Reserve Ammo: " + reserveAmmo);
                 }
                 return true;
             }
