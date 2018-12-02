@@ -21,10 +21,9 @@ public class RailGun : Wepond {
                 {
                     //player.CmdSpawnRail(1, spawnPos, hit.point);
                 }
-                //player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 15f);
+                player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 15f);
                 timer.reset();
                 loadedAmmo--;
-                //FindObjectOfType<ObjectSpawner>().RpcSpawnObject(0, transform.position);
                 Debug.Log("Hora");
             }
         }

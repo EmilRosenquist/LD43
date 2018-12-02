@@ -85,10 +85,23 @@ public class Player : NetworkBehaviour{
     public void CmdSpawnBullet(int bulletId, Vector3 spawnPos, Vector3 direction){
         RpcSpawnBullet(bulletId, spawnPos, direction);
     }
+
     [ClientRpc]
     void RpcSpawnBullet(int bulletId, Vector3 spawnPos, Vector3 direction){
         GameObject b = Instantiate(bulletPrefabs[bulletId], spawnPos, Quaternion.identity) as GameObject;
         b.GetComponentInChildren<Bullet>().MoveDir = direction;
+        Destroy(b, 3.0f);
+    }
+    [Command]
+    public void CmdSpawnRail(int bulletId, Vector3 spawnPos, Vector3 endPos)
+    {
+        RpcSpawnRail( bulletId,  spawnPos,  endPos);
+    }
+    [ClientRpc]
+    void RpcSpawnRail(int bulletId, Vector3 spawnPos, Vector3 endPos)
+    {
+        GameObject b = Instantiate(bulletPrefabs[bulletId], spawnPos, Quaternion.identity) as GameObject;
+        b.GetComponent<RailBullet>().setPositions(spawnPos, endPos);
         Destroy(b, 3.0f);
     }
     [Command]
