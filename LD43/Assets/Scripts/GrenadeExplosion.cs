@@ -41,7 +41,7 @@ public class GrenadeExplosion : MonoBehaviour {
         for (int i = 0; i < hitColliders.Length; i++)
         {
 
-            Debug.Log(hitColliders[i].gameObject.name);
+//            Debug.Log(hitColliders[i].gameObject.name);
             GameObject hitGameObject = hitColliders[i].transform.gameObject;
             if (hitGameObject.GetComponent<Player>())
             {
