@@ -467,7 +467,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Tpose
       takeName: Take 001
-      firstFrame: 125
+      firstFrame: 124
       lastFrame: 125
       wrapMode: 0
       orientationOffsetY: 0
@@ -495,7 +495,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 0.6
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
@@ -514,8 +514,8 @@ ModelImporter:
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
-    useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
+    useFileScale: 0
+    previousCalculatedGlobalScale: 0.6
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
