@@ -7,10 +7,16 @@ public class CharacterSelect : MonoBehaviour {
     [SerializeField] private GameObject[] skinButtons;
     [SerializeField] private GameObject CharacterSelectUI;
     [SerializeField] private GameManager gm;
+    [SerializeField] private InputField nameSelector;
+    [SerializeField] private string playerName = "";
     private int selectedSkin = 0;
     public int SelectedSkin
     {
         get { return selectedSkin; }
+    }
+    public string PlayerName
+    {
+        get { return playerName; }
     }
 	// Use this for initialization
 	void Start () {
@@ -26,7 +32,9 @@ public class CharacterSelect : MonoBehaviour {
                 CharacterSelectUI.SetActive(false);
             }
         }
-	}
+        playerName = nameSelector.text;
+
+    }
     public void SelectSkin(int skinIndex)
     {
         selectedSkin = skinIndex;

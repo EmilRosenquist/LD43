@@ -20,6 +20,8 @@ public class Player : NetworkBehaviour{
 
     [SyncVar(hook = "OnChangeSkin")]
     public int skinIndex = 0;
+    [SyncVar]
+    public string playerName;
 
     [SyncVar]//Add hook to update various stuff.
     public int health = 100;
@@ -38,21 +40,19 @@ public class Player : NetworkBehaviour{
 
     void Start() { 
         ids = new List<int>();
-        
-        if(isLocalPlayer)
-        {
-            SkinnedMeshRenderer[] tmp = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
-            foreach(SkinnedMeshRenderer s in tmp)
-            {
-                if(s.gameObject.CompareTag("char_mesh"))
-                {
-                    s.gameObject.SetActive(false);
-                }
-            }
-        }
+         
+        CmdChangeName(FindObjectOfType<CharacterSelect>().PlayerName);
         if (!isLocalPlayer){
             OnChangeSkin(skinIndex);
             return;
+        }
+        SkinnedMeshRenderer[] tmp = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+        foreach (SkinnedMeshRenderer s in tmp)
+        {
+            if (s.gameObject.CompareTag("char_mesh"))
+            {
+                s.gameObject.SetActive(false);
+            }
         }
         CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
@@ -138,7 +138,15 @@ public class Player : NetworkBehaviour{
         this.weaponId = weaponId;
         weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
     }
-
+    [Command]
+    void CmdChangeName(string newPlayerName)
+    {
+        if(newPlayerName == "" || newPlayerName == null)
+        {
+            playerName = "Player: " + netId.ToString();
+        }
+        playerName = newPlayerName;
+    }
     [Command]
     void CmdChangeSkin(int newSkinIndex)
     {
