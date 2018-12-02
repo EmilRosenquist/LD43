@@ -33,6 +33,8 @@ public class Player : NetworkBehaviour{
     void Start() { 
         ids = new List<int>();
         if (!isLocalPlayer){
+            OnChangeSkin(skinIndex);
+            OnChangeWeapon(weaponId);
             return;
         }
         CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);
@@ -43,7 +45,8 @@ public class Player : NetworkBehaviour{
             g.SetActive(false);
         }
         weaponHolder.GetChild(0).gameObject.SetActive(true);
-        OnChangeWeapon(weaponId);
+        
+        
     }
     void Update(){
         if (!isLocalPlayer){
