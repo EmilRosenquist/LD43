@@ -1893,7 +1893,7 @@ GameObject:
   - component: {fileID: 137352759454708114}
   m_Layer: 0
   m_Name: char_mesh
-  m_TagString: Untagged
+  m_TagString: char_mesh
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
