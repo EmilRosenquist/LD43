@@ -24,15 +24,16 @@ public class Bullet : MonoBehaviour {
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "GUNS")
+        //Spela upp ljud som indikerar träff
+        Debug.Log(other.tag);
+        if (other.gameObject.GetComponent<Player>() != null && other.gameObject.GetComponent<Player>() != shooter)
         {
-            //Spela upp ljud som indikerar träff
-            Debug.Log(other.tag);
-            if (other.gameObject.GetComponent<Player>() != null)
-            {
-                other.gameObject.GetComponent<Player>().TakeDamage(dmg);
-                shooter.DidDamage(dmg);
-            }
+            other.gameObject.GetComponent<Player>().TakeDamage(dmg);
+            shooter.DidDamage(dmg);
+        }
+        if (other.gameObject.GetComponent<Player>() == null){
+            Destroy(gameObject);
+        }else if (other.gameObject.GetComponent<Player>() != null && other.gameObject.GetComponent<Player>() != shooter){
             Destroy(gameObject);
         }
     }

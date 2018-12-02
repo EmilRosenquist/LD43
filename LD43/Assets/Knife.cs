@@ -37,22 +37,22 @@ public class Knife : Wepond {
 
     public override int CheckMagasine()
     {
-        throw new System.NotImplementedException();
+        return -1;
     }
 
     public override int CheckTotalBullets()
     {
-        throw new System.NotImplementedException();
+        return -1;
     }
 
     public override bool ReloadAmmo()
     {
-        throw new System.NotImplementedException();
+        return true;
     }
 
     public override void Reset()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     // Use this for initialization

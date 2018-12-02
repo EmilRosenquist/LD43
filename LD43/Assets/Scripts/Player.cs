@@ -52,13 +52,6 @@ public class Player : NetworkBehaviour{
                 CmdChangeWeapon((weaponId == 0) ? 1 : 0);
             }
         }else{
-            if (Input.GetMouseButtonDown(1)){
-                NetworkInstanceId test = new NetworkInstanceId((uint)ids[0]);
-
-                GameObject te = NetworkServer.FindLocalObject(test);
-                transform.position = te.transform.position;
-                transform.rotation = te.transform.rotation;
-            }
         }
     }
     void Attack(){
@@ -131,11 +124,12 @@ public class Player : NetworkBehaviour{
     [Command]
     public void CmdResetStats(){
         health = 100;
+        RpcResetStats();
     }
     [ClientRpc]
     void RpcResetStats(){
         for (int i = 0; i < weaponHolder.childCount; i++){
-            //weaponHolder.GetChild(i).GetComponent<Wepond>().Reset();
+            weaponHolder.GetChild(i).GetComponent<Wepond>().Reset();
         }
     }
 }
