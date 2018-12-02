@@ -71,9 +71,12 @@ public class Pistol : Wepond {
             {
                 if (loadedAmmo > 0)
                 {
-                    loadedAmmo--;
-                    player.CmdSpawnBullet(0, spawnPos, direction);
-                    timer.reset();
+                    if(am.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
+                    {
+                        loadedAmmo--;
+                        player.CmdSpawnBullet(0, spawnPos, direction);
+                        timer.reset();
+                    }
                 }
                 else
                 {
