@@ -21,7 +21,7 @@ public class GameManager : NetworkBehaviour
     private Timer buyTimer = new Timer(0);
 
     [SyncVar]
-    states currentState = states.PREGAME;
+    public states currentState = states.PREGAME;
 
 
 

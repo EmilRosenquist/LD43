@@ -1882,8 +1882,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4732219537100946}
   - component: {fileID: 33550559480566732}
-  - component: {fileID: 23147417282852612}
-  - component: {fileID: 136950245578263408}
   - component: {fileID: 143509748622401742}
   - component: {fileID: 114938646708754152}
   - component: {fileID: 114957493877847012}
@@ -4609,41 +4607,6 @@ Transform:
   m_Father: {fileID: 4301177817074670}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23147417282852612
-MeshRenderer:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791562993764994}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 4294967295
-  m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!33 &33550559480566732
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -4688,10 +4651,17 @@ MonoBehaviour:
   bulletPrefabs:
   - {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027, type: 2}
   - {fileID: 1912327147758926, guid: 90cad53e30ef7354681cc9d9c318fec1, type: 2}
+  skins:
+  - {fileID: 2800000, guid: ad8c779111767c34b9e2a33f8854375f, type: 3}
+  - {fileID: 2800000, guid: 8f8b5039d32d69341bccb4111f374eea, type: 3}
+  - {fileID: 2800000, guid: 963d92a2372ee944c8eba1911b3fd145, type: 3}
+  - {fileID: 2800000, guid: 223dd090b7ff3df44bd21b93789d74de, type: 3}
+  - {fileID: 2800000, guid: 0be420d0c5b4e1d4cb25347a2128b4bc, type: 3}
   weaponHolder: {fileID: 4875845750354494}
   speed: 5
   sprintMultiplier: 1.3
   jumpHeight: 5
+  skinIndex: 0
   health: 100
   damageDone: 0
   weaponId: 0
@@ -4760,19 +4730,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13d9587bf8bb754da3b9eaa81489701, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &136950245578263408
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1791562993764994}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.23
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137352759454708114
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -4788,7 +4745,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: fc6059f786ad26d489e4e95d68ff63c2, type: 2}
+  - {fileID: 2100000, guid: fc5c3db4927d36e41a74553d095f64be, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

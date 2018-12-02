@@ -7,6 +7,7 @@ public class Player : NetworkBehaviour{
     public GameObject playerCameraPrefab;
     public List<GameObject> weaponPrefabs;
     public List<GameObject> bulletPrefabs;
+    public List<Texture> skins;
     public Transform weaponHolder;
     private Camera playerCamera;
 
@@ -16,6 +17,9 @@ public class Player : NetworkBehaviour{
     public float sprintMultiplier = 1.3f;
     [SyncVar]
     public float jumpHeight = 5f;
+
+    [SyncVar(hook = "OnChangeSkin")]
+    public int skinIndex = 0;
 
     [SyncVar]//Add hook to update various stuff.
     public int health = 100;
@@ -31,6 +35,7 @@ public class Player : NetworkBehaviour{
         if (!isLocalPlayer){
             return;
         }
+        CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
         playerCamera = cameraObject.GetComponent<Camera>();
         for(int i = 0; i < weaponPrefabs.Count; i++){
@@ -44,6 +49,7 @@ public class Player : NetworkBehaviour{
         if (!isLocalPlayer){
             return;
         }
+
         if (isAlive){
             if (Input.GetMouseButton(0)){
                 Attack();
@@ -110,6 +116,17 @@ public class Player : NetworkBehaviour{
         this.weaponId = weaponId;
         weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
     }
+
+    [Command]
+    void CmdChangeSkin(int newSkinIndex)
+    {
+        skinIndex = newSkinIndex;
+    }
+    void OnChangeSkin(int skinIndex)
+    {
+        GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture = skins[skinIndex];
+    }
+
     [Command]
     public void CmdToggleSpectatorMode(bool toggle){
         RpcToggleSpectatorMode(toggle);
