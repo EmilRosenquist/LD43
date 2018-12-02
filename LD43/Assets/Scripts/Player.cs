@@ -33,18 +33,19 @@ public class Player : NetworkBehaviour{
     void Start() { 
         ids = new List<int>();
         OnChangeSkin(skinIndex);
-        OnChangeWeapon(weaponId);
+        
         if (!isLocalPlayer){
             return;
         }
         CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
         playerCamera = cameraObject.GetComponent<Camera>();
-        for(int i = 0; i < weaponPrefabs.Count; i++){
+        for (int i = 0; i < weaponPrefabs.Count; i++){
             GameObject g = Instantiate(weaponPrefabs[i], weaponHolder);
             g.SetActive(false);
         }
         weaponHolder.GetChild(0).gameObject.SetActive(true);
+        OnChangeWeapon(weaponId);
         
         
     }
