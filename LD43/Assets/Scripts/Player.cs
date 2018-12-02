@@ -114,7 +114,7 @@ public class Player : NetworkBehaviour{
         weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
     }
     [Command]
-    void CmdToggleSpectatorMode(bool toggle){
+    public void CmdToggleSpectatorMode(bool toggle){
         RpcToggleSpectatorMode(toggle);
     }
     [ClientRpc]
