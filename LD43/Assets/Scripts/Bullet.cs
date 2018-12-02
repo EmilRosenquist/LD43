@@ -5,7 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour {
     float liveTime = 10f;
     Timer timer;
-    float velocity = 15f;
+    [SerializeField] private float velocity = 50f;
+    [SerializeField] private int dmg = 25;
     Vector3 moveDir = Vector3.up;
 
     public Vector3 MoveDir
@@ -28,7 +29,7 @@ public class Bullet : MonoBehaviour {
             Debug.Log(other.tag);
             if (other.gameObject.GetComponent<Player>() != null)
             {
-                other.gameObject.GetComponent<Player>().TakeDamage(20);
+                other.gameObject.GetComponent<Player>().TakeDamage(dmg);
             }
             Destroy(gameObject);
         }
