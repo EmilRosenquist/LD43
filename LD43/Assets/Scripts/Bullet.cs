@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour {
     [SerializeField] private float velocity = 50f;
     [SerializeField] private int dmg = 25;
     Vector3 moveDir = Vector3.up;
+    public Player shooter;
 
     public Vector3 MoveDir
     {
@@ -30,6 +31,7 @@ public class Bullet : MonoBehaviour {
             if (other.gameObject.GetComponent<Player>() != null)
             {
                 other.gameObject.GetComponent<Player>().TakeDamage(dmg);
+                shooter.CmdDidDamage(dmg);
             }
             Destroy(gameObject);
         }

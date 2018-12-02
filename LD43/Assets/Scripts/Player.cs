@@ -9,7 +9,6 @@ public class Player : NetworkBehaviour{
     public List<GameObject> bulletPrefabs;
     public Transform weaponHolder;
     private Camera playerCamera;
-    private GameObject weaponGameObject;
 
     [SyncVar]
     public float speed = 5f;
@@ -82,6 +81,10 @@ public class Player : NetworkBehaviour{
         this.health -= damageAmount;
     }
     [Command]
+    public void CmdDidDamage(int amount){
+        damageDone += amount;
+    }
+    [Command]
     public void CmdSpawnBullet(int bulletId, Vector3 spawnPos, Vector3 direction){
         RpcSpawnBullet(bulletId, spawnPos, direction);
     }
@@ -90,6 +93,7 @@ public class Player : NetworkBehaviour{
     void RpcSpawnBullet(int bulletId, Vector3 spawnPos, Vector3 direction){
         GameObject b = Instantiate(bulletPrefabs[bulletId], spawnPos, Quaternion.identity) as GameObject;
         b.GetComponentInChildren<Bullet>().MoveDir = direction;
+        b.GetComponentInChildren<Bullet>().shooter = this;
         Destroy(b, 3.0f);
     }
     [Command]
@@ -127,5 +131,11 @@ public class Player : NetworkBehaviour{
     [Command]
     public void CmdResetStats(){
         health = 100;
+    }
+    [ClientRpc]
+    void RpcResetStats(){
+        for (int i = 0; i < weaponHolder.childCount; i++){
+            //weaponHolder.GetChild(i).GetComponent<Wepond>().Reset();
+        }
     }
 }
