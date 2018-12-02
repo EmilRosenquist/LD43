@@ -15,7 +15,7 @@ public class Knife : Wepond {
         {
 
             targetDistance = hit.distance;
-            Debug.Log("HIT SOMETHING : " + hit.transform.gameObject.name);
+//            Debug.Log("HIT SOMETHING : " + hit.transform.gameObject.name);
             if (targetDistance < maxDistance)
             {
                 GameObject hitGameObject = hit.transform.gameObject;

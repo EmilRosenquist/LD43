@@ -18,7 +18,8 @@ public class RailBullet : MonoBehaviour {
         
         lr = GetComponent<LineRenderer>();
         lr.SetPositions(poses);
-
+        Transform killZone = transform.GetChild(0);
+        killZone.position = poses[1];
     }
 	
 	// Update is called once per frame

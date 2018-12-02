@@ -51,3 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a0a0d5d561c8042a74182a776807a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxLoadedAmmo: 30
+  shootSpeed: 0.5

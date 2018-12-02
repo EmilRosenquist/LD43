@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RailGun : Wepond {
-    private int maxLoadedAmmo = 5;
+    [SerializeField] private int maxLoadedAmmo = 5;
 
-    private float shootSpeed = 2f;
+    [SerializeField] private float shootSpeed = 2f;
     
     private Timer timer;
 
@@ -19,12 +19,15 @@ public class RailGun : Wepond {
                 RaycastHit hit;
                 if (Physics.Raycast(spawnPos, direction * 15f, out hit))
                 {
-                    //player.CmdSpawnRail(1, spawnPos, hit.point);
+                    player.CmdSpawnRail(1, spawnPos, hit.point);
                 }
-                player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 15f);
+                else
+                {
+                    player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 15f);
+
+                }
                 timer.reset();
                 loadedAmmo--;
-                Debug.Log("Hora");
             }
         }
     }
