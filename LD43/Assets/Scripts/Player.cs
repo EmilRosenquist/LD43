@@ -11,20 +11,32 @@ public class Player : NetworkBehaviour{
     public Transform weaponHolder;
     private Camera playerCamera;
     private SkinnedMeshRenderer smr;
+    private PlayerStats playerStats;
+
     [SyncVar]
-    public float speed = 5f;
+    public int health;
+    public int baseHealth = 100;
+    private int maxHealth;
     [SyncVar]
-    public float sprintMultiplier = 1.3f;
+    public float speed;
+    public float baseSpeed = 5f;
     [SyncVar]
-    public float jumpHeight = 5f;
+    public float sprintMultiplier;
+    public float baseSprintMultiplier = 1.3f;
+    [SyncVar]
+    public float jumpHeight;
+    public float baseJumpHeight = 5f;
+    [SyncVar]
+    public float damageMultiplier = 1.0f;
+    [SyncVar]
+    public int money = 0;
+    public float moneyMultiplier = 1.0f;
 
     [SyncVar(hook = "OnChangeSkin")]
     public int skinIndex = 0;
     [SyncVar]
     public string playerName;
 
-    [SyncVar]//Add hook to update various stuff.
-    public int health = 100;
     [SyncVar]
     public int damageDone = 0;
     [SyncVar(hook = "OnChangeWeapon")]
@@ -46,6 +58,7 @@ public class Player : NetworkBehaviour{
             OnChangeSkin(skinIndex);
             return;
         }
+        maxHealth = baseHealth;
         SkinnedMeshRenderer[] tmp = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (SkinnedMeshRenderer s in tmp)
         {
@@ -57,14 +70,19 @@ public class Player : NetworkBehaviour{
         CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
         playerCamera = cameraObject.GetComponent<Camera>();
+        playerStats = gameObject.AddComponent<PlayerStats>();
+
+        Perk p = Perks.GeneratePerk(1);
+        ApplyPerk(p);
+
         for (int i = 0; i < weaponPrefabs.Count; i++){
             GameObject g = Instantiate(weaponPrefabs[i], weaponHolder);
             g.SetActive(false);
         }
         weaponHolder.GetChild(0).gameObject.SetActive(true);
         OnChangeWeapon(weaponId);
-        
-        
+        CmdResetStats();
+
     }
     void Update(){
         if (!isLocalPlayer){
@@ -103,6 +121,7 @@ public class Player : NetworkBehaviour{
         if (!isServer)
             return;
         damageDone += amount;
+        money += (int)(amount * moneyMultiplier);
     }
     [Command]
     public void CmdSpawnBullet(int bulletId, Vector3 spawnPos, Vector3 direction){
@@ -170,7 +189,7 @@ public class Player : NetworkBehaviour{
     }
     [Command]
     public void CmdResetStats(){
-        health = 100;
+        health = maxHealth;
         RpcResetStats();
     }
     [ClientRpc]
@@ -178,5 +197,51 @@ public class Player : NetworkBehaviour{
         for (int i = 0; i < weaponHolder.childCount; i++){
             weaponHolder.GetChild(i).GetComponent<Wepond>().Reset();
         }
+    }
+
+    /*-----------------------Perks-----------------------*/
+    public void ApplyPerk(Perk p){
+        p.good.ApplyAbility(this);
+        p.bad.ApplyAbility(this);
+    }
+    //Health
+    public void AddToHealthMultiplier(float multiplier){
+        playerStats.healthMultiplier += multiplier - 1.0f;
+        CmdUpdateMaxHealth(multiplier);
+    }
+    [Command]void CmdUpdateMaxHealth(float multiplier){
+        maxHealth = (int)(baseHealth * multiplier);
+    }
+    //Damage
+    public void AddToDamageMultiplierMultiplier(float multiplier){
+        playerStats.damageMultiplierMultiplier += multiplier - 1.0f;
+        CmdUpdateDamageMultiplier(playerStats.damageMultiplierMultiplier);
+    }
+    [Command]void CmdUpdateDamageMultiplier(float multiplier){
+        damageMultiplier = 1.0f * multiplier;
+    }
+    //Speed
+    public void AddToSpeedMultiplier(float multiplier){
+        playerStats.speedMultiplier += multiplier - 1.0f;
+        CmdUpdateSpeedMultiplier(multiplier);
+    }
+    [Command]void CmdUpdateSpeedMultiplier(float multiplier){
+        speed = baseSpeed * multiplier;
+    }
+    //Sprint
+    public void AddToSprintMultiplier(float multiplier){
+        playerStats.sprintMultiplier += multiplier - 1.0f;
+        CmdUpdateSprintMultiplier(playerStats.sprintMultiplier);
+    }
+    [Command]void CmdUpdateSprintMultiplier(float multiplier){
+        sprintMultiplier = baseSprintMultiplier * multiplier;
+    }
+    //Jump
+    public void AddToJumpHeightMultiplier(float multiplier){
+        playerStats.jumpHeightMultiplier += multiplier - 1.0f;
+        CmdUpdateJumpHeightMultiplier(playerStats.jumpHeightMultiplier);
+    }
+    [Command]void CmdUpdateJumpHeightMultiplier(float multiplier){
+        jumpHeight = baseJumpHeight * multiplier;
     }
 }
