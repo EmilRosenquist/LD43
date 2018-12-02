@@ -32,9 +32,9 @@ public class Player : NetworkBehaviour{
     List<int> ids;
     void Start() { 
         ids = new List<int>();
+        OnChangeSkin(skinIndex);
+        OnChangeWeapon(weaponId);
         if (!isLocalPlayer){
-            OnChangeSkin(skinIndex);
-            OnChangeWeapon(weaponId);
             return;
         }
         CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);
