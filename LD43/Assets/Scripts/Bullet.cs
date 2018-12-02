@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour {
     Vector3 moveDir = Vector3.up;
     public Player shooter;
     private bool isHit = false;
+    private bool hasHit = false;
 
     public Vector3 MoveDir
     {
@@ -26,14 +27,15 @@ public class Bullet : MonoBehaviour {
     {
         //Spela upp ljud som indikerar träff
         Debug.Log(other.gameObject.name);
-        if (other.gameObject.GetComponent<Player>() != null && other.gameObject.GetComponent<Player>() != shooter)
+        if (!hasHit && other.gameObject.GetComponentInParent<Player>() != null && other.gameObject.GetComponentInParent<Player>() != shooter)
         {
-            other.gameObject.GetComponent<Player>().TakeDamage(dmg);
+            hasHit = true;
+            other.gameObject.GetComponentInParent<Player>().TakeDamage(dmg);
             shooter.DidDamage(dmg);
         }
-        if (other.gameObject.GetComponent<Player>() == null){
+        if (other.gameObject.GetComponentInParent<Player>() == null){
             Destroy(gameObject);
-        }else if (other.gameObject.GetComponent<Player>() != null && other.gameObject.GetComponent<Player>() != shooter){
+        }else if (other.gameObject.GetComponentInParent<Player>() != null && other.gameObject.GetComponentInParent<Player>() != shooter){
             Destroy(gameObject);
         }
     }
