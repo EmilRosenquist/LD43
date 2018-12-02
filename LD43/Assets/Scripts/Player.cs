@@ -34,17 +34,14 @@ public class Player : NetworkBehaviour{
         }
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
         playerCamera = cameraObject.GetComponent<Camera>();
-        for(int i = 0; i < weaponPrefabs.Count; i++)
-        {
+        for(int i = 0; i < weaponPrefabs.Count; i++){
             GameObject g = Instantiate(weaponPrefabs[i], weaponHolder);
             g.SetActive(false);
         }
         weaponHolder.GetChild(0).gameObject.SetActive(true);
         OnChangeWeapon(weaponId);
-
     }
     void Update(){
-        CmdUpdateConnectionsList();
         if (!isLocalPlayer){
             return;
         }
@@ -69,25 +66,19 @@ public class Player : NetworkBehaviour{
         weaponHolder.GetComponentInChildren<Wepond>().Attack(this, weaponHolder.GetChild(weaponId).transform.position, playerCamera.transform.forward);
     }
     public void TakeDamage(int damageAmount) {
-        Debug.Log("HELLO IM NOT SOMETHING");
-        Debug.Log("THIS IS HEALTH1 : " + health);
         if (!isServer) {
             CmdTakeDamage(damageAmount);
             return;
         }
-
         health -= damageAmount;
-        Debug.Log("THIS IS HEALTH13 : " + health);
-        /*if(health <= 0){
+        if(health <= 0){
             isAlive = false;
-            ToggleSpecatorMode(false);
+            CmdToggleSpectatorMode(false);
             Debug.Log("Dead!");
-        }*/
+        }
     }
     [Command]
     public void CmdTakeDamage(int damageAmount){
-        Debug.Log("HELLO IM SERVER");
-        Debug.Log("THIS IS HEALTH : " + health);
         this.health -= damageAmount;
     }
     [Command]
@@ -104,30 +95,20 @@ public class Player : NetworkBehaviour{
     void CmdChangeWeapon(int newId){
         weaponId = newId;
     }
-    [Command]
-    void CmdUpdateConnectionsList(){
-        int[] ids = new int[NetworkServer.connections.Count];
-        for (int i = 0; i < NetworkServer.connections.Count; i++)
-            ids[i] = NetworkServer.connections[i].connectionId;
-        RpcUpdateConnectionList(ids);
-    }
-    [ClientRpc]
-    void RpcUpdateConnectionList(int[] list) {
-        if (ids != null) {
-            ids.Clear();
-            ids.AddRange(list);
-        }
-    }
     void OnChangeWeapon(int weaponId){
         weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
         this.weaponId = weaponId;
         weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
     }
-    void ToggleSpecatorMode(bool toggle){
+    [Command]
+    void CmdToggleSpectatorMode(bool toggle){
+        RpcToggleSpectatorMode(toggle);
+    }
+    [ClientRpc]
+    void RpcToggleSpectatorMode(bool toggle){
         isAlive = toggle;
         transform.GetChild(0).gameObject.SetActive(toggle);
         GetComponent<CharacterController>().enabled = toggle;
-        GetComponent<MeshRenderer>().enabled = toggle;
-        GetComponent<CapsuleCollider>().enabled = toggle;
+        GetComponentInChildren<SkinnedMeshRenderer>().enabled = toggle;
     }
 }
