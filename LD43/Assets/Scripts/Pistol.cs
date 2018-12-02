@@ -58,6 +58,10 @@ public class Pistol : Wepond {
     {
         reloadTimer.reset();
         reloading = true;
+        if (am)
+        {
+            am.SetTrigger("Reload");
+        }
     }
 
 
