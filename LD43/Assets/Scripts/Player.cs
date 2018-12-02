@@ -10,7 +10,7 @@ public class Player : NetworkBehaviour{
     public List<Texture> skins;
     public Transform weaponHolder;
     private Camera playerCamera;
-
+    private SkinnedMeshRenderer smr;
     [SyncVar]
     public float speed = 5f;
     [SyncVar]
@@ -30,11 +30,28 @@ public class Player : NetworkBehaviour{
     [SyncVar]
     public bool isAlive = true;
     List<int> ids;
+
+    private void Awake()
+    {
+        smr = GetComponentInChildren<SkinnedMeshRenderer>();
+    }
+
     void Start() { 
         ids = new List<int>();
-        OnChangeSkin(skinIndex);
         
+        if(isLocalPlayer)
+        {
+            SkinnedMeshRenderer[] tmp = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
+            foreach(SkinnedMeshRenderer s in tmp)
+            {
+                if(s.gameObject.CompareTag("char_mesh"))
+                {
+                    s.gameObject.SetActive(false);
+                }
+            }
+        }
         if (!isLocalPlayer){
+            OnChangeSkin(skinIndex);
             return;
         }
         CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);
@@ -129,7 +146,7 @@ public class Player : NetworkBehaviour{
     }
     void OnChangeSkin(int skinIndex)
     {
-        GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture = skins[skinIndex];
+       smr.material.mainTexture = skins[skinIndex];
     }
 
     [Command]
@@ -141,7 +158,7 @@ public class Player : NetworkBehaviour{
         isAlive = toggle;
         transform.GetChild(0).gameObject.SetActive(toggle);
         GetComponent<CharacterController>().enabled = toggle;
-        GetComponentInChildren<SkinnedMeshRenderer>().enabled = toggle;
+        smr.enabled = toggle;
     }
     [Command]
     public void CmdResetStats(){
