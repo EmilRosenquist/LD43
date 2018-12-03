@@ -113,7 +113,19 @@ public class Player : NetworkBehaviour{
         }
     }
     void Attack(){
-        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, weaponHolder.GetChild(weaponId).GetChild(0).transform.position, playerCamera.transform.forward);
+        Vector3 dir = Vector3.zero;
+        RaycastHit hit;
+        Ray ray = playerCamera.ScreenPointToRay(new Vector3(Screen.width/2, Screen.height/2, 0));
+        if (Physics.Raycast(ray, out hit))
+        {
+            dir = (hit.point - weaponHolder.GetChild(weaponId).GetChild(0).transform.position).normalized;
+        }
+        else
+        {
+            dir = ((playerCamera.transform.position + playerCamera.transform.forward * 100) - weaponHolder.GetChild(weaponId).GetChild(0).transform.position).normalized;
+        }
+        
+        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, weaponHolder.GetChild(weaponId).GetChild(0).transform.position, dir);
     }
     public void TakeDamage(int damageAmount) {
         if (!isServer) {
