@@ -52,7 +52,6 @@ public class Player : NetworkBehaviour{
     private void Awake()
     {
         smr = GetComponentInChildren<SkinnedMeshRenderer>();
-        playerStats = gameObject.AddComponent<PlayerStats>();
     }
 
     void Start() { 
@@ -76,6 +75,7 @@ public class Player : NetworkBehaviour{
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
         playerCamera = cameraObject.GetComponent<Camera>();
         weaponHolder = cameraObject.transform.GetChild(0).transform;
+        playerStats = gameObject.AddComponent<PlayerStats>();
 
         for (int i = 0; i < weaponPrefabs.Count; i++){
             GameObject g = Instantiate(weaponPrefabs[i], weaponHolder);
@@ -265,6 +265,8 @@ public class Player : NetworkBehaviour{
         money = 0;
         wins = 0;
         damageDone = 0;
+        if(isLocalPlayer)
+            playerStats.Reset();
     }
     [ClientRpc]
     void RpcResetStats(){
@@ -286,7 +288,7 @@ public class Player : NetworkBehaviour{
         CmdUpdateMaxHealth(multiplier);
     }
     [Command]void CmdUpdateMaxHealth(float multiplier){
-        maxHealth = (((int)(baseHealth * multiplier)) > 1) ? (int)(baseHealth * multiplier) : 1;
+        maxHealth += (((int)(baseHealth * multiplier)) > 1) ? (int)(baseHealth * multiplier) : 1;
     }
     //Damage
     public void AddToDamageMultiplierMultiplier(float multiplier){
@@ -294,7 +296,7 @@ public class Player : NetworkBehaviour{
         CmdUpdateDamageMultiplier(playerStats.damageMultiplierMultiplier);
     }
     [Command]void CmdUpdateDamageMultiplier(float multiplier){
-        damageMultiplier = (1.0f * multiplier > 1) ? 1.0f * multiplier : 1;
+        damageMultiplier += (1.0f * multiplier > 1) ? 1.0f * multiplier : 1;
     }
     //Speed
     public void AddToSpeedMultiplier(float multiplier){
@@ -302,7 +304,7 @@ public class Player : NetworkBehaviour{
         CmdUpdateSpeedMultiplier(multiplier);
     }
     [Command]void CmdUpdateSpeedMultiplier(float multiplier){
-        speed = (baseSpeed * multiplier > 0) ? baseSpeed * multiplier : 0;
+        speed += (baseSpeed * multiplier > 0) ? baseSpeed * multiplier : 0;
     }
     //Sprint
     public void AddToSprintMultiplier(float multiplier){
@@ -310,7 +312,7 @@ public class Player : NetworkBehaviour{
         CmdUpdateSprintMultiplier(playerStats.sprintMultiplier);
     }
     [Command]void CmdUpdateSprintMultiplier(float multiplier){
-        sprintMultiplier = (baseSprintMultiplier * multiplier > 1) ? baseSprintMultiplier * multiplier : 1;
+        sprintMultiplier += (baseSprintMultiplier * multiplier > 1) ? baseSprintMultiplier * multiplier : 1;
     }
     //Jump
     public void AddToJumpHeightMultiplier(float multiplier){
@@ -318,6 +320,6 @@ public class Player : NetworkBehaviour{
         CmdUpdateJumpHeightMultiplier(playerStats.jumpHeightMultiplier);
     }
     [Command]void CmdUpdateJumpHeightMultiplier(float multiplier){
-        jumpHeight = (baseJumpHeight * multiplier > 0) ? baseJumpHeight * multiplier : 0;
+        jumpHeight += (baseJumpHeight * multiplier > 0) ? baseJumpHeight * multiplier : 0;
     }
 }
