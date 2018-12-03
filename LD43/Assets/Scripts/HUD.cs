@@ -49,6 +49,19 @@ public class HUD : MonoBehaviour {
     private bool imageAdded4 = false;
     private bool imageAdded5 = false;
 
+    int nrHealthMultiplier = 0;
+    int nrDamageMultiplier = 0;
+    int nrSpeedMultiplier = 0;
+    int nrSprintMultiplier = 0;
+    int nrJumpHeightMultiplier = 0;
+    float currentHealthMultiplier;
+    float currentDamageMultiplier;
+    float currentSpeedMultiplier;
+    float currentSprintMultiplier;
+    float currentJumpHeightMultiplier;
+
+    Color redish = new Color(0.8509805f, 0.4627451f, 4627451f);
+
     //Health
     private int health;
     //Ammo
@@ -116,10 +129,11 @@ public class HUD : MonoBehaviour {
             healthText.text = health.ToString();
 
 
-
             PerksUpdate();
 
             ImageUpdate();
+
+            CheckUpdates();
         }
         else
         {
@@ -159,13 +173,16 @@ public class HUD : MonoBehaviour {
     {
         if (CheckHealthMultiplier() != null)
         {
+            Debug.Log("1");
             for (int i = 0; i < perksImages.Count; i++)
             {
+                Debug.Log("2");
+
                 if (perksImages[i].sprite == null && !imageAdded1)
                 {
+                    Debug.Log("3");
                     imageAdded1 = true;
                     perksImages[i].sprite = CheckHealthMultiplier();
-                    //perksText[i].color = new Color(221, 120, 120, 255);
 
                     if (healthMultiplier >= 100)
                     {
@@ -173,7 +190,23 @@ public class HUD : MonoBehaviour {
                     }
 
                     perksText[i].text = healthMultiplier.ToString() + "%";
+
+                    currentHealthMultiplier = healthMultiplier;                    
+                    nrHealthMultiplier = i;
+
                     backgroundTintImages[i].enabled = true;
+                }
+                
+                CheckHealthMultiplier();
+
+                if (perksText[nrHealthMultiplier].text != healthMultiplier + "%")
+                {
+                    if (healthMultiplier >= 100)
+                        perksText[nrHealthMultiplier].color = Color.white;
+                    else
+                        perksText[nrHealthMultiplier].color = redish;
+            
+                    perksText[nrHealthMultiplier].text = healthMultiplier.ToString() + "%";
                 }
             }
         }
@@ -194,7 +227,23 @@ public class HUD : MonoBehaviour {
                     }
 
                     perksText[i].text = damageMultiplier.ToString() + "%";
+
+                    currentDamageMultiplier = damageMultiplier;
+                    nrDamageMultiplier = i;
+
                     backgroundTintImages[i].enabled = true;
+                }
+
+                CheckDamageMultiplier();
+
+                if (perksText[nrDamageMultiplier].text != damageMultiplier + "%")
+                {
+                    if (damageMultiplier >= 100)
+                        perksText[nrDamageMultiplier].color = Color.white;
+                    else
+                        perksText[nrDamageMultiplier].color = redish;
+
+                    perksText[nrDamageMultiplier].text = damageMultiplier.ToString() + "%";
                 }
             }
         }
@@ -215,7 +264,23 @@ public class HUD : MonoBehaviour {
                     }
 
                     perksText[i].text = speedMultiplier.ToString() + "%";
+
+                    currentSpeedMultiplier = speedMultiplier;
+                    nrSpeedMultiplier = i;
+
                     backgroundTintImages[i].enabled = true;
+                }
+
+                CheckSpeedMultiplier();
+
+                if (perksText[nrSpeedMultiplier].text != speedMultiplier + "%")
+                {
+                    if (speedMultiplier >= 100)
+                        perksText[nrSpeedMultiplier].color = Color.white;
+                    else
+                        perksText[nrSpeedMultiplier].color = redish;
+
+                    perksText[nrSpeedMultiplier].text = speedMultiplier.ToString() + "%";
                 }
             }
         }
@@ -236,7 +301,23 @@ public class HUD : MonoBehaviour {
                     }
 
                     perksText[i].text = sprintMultiplier.ToString() + "%";
+
+                    currentSprintMultiplier = sprintMultiplier;
+                    nrSprintMultiplier = i;
+
                     backgroundTintImages[i].enabled = true;
+                }
+
+                CheckSprintMultiplier();
+
+                if (perksText[nrSprintMultiplier].text != sprintMultiplier + "%")
+                {
+                    if (sprintMultiplier >= 100)
+                        perksText[nrSprintMultiplier].color = Color.white;
+                    else
+                        perksText[nrSprintMultiplier].color = redish;
+
+                    perksText[nrSprintMultiplier].text = sprintMultiplier.ToString() + "%";
                 }
             }
         }
@@ -257,13 +338,31 @@ public class HUD : MonoBehaviour {
                     }
 
                     perksText[i].text = jumpHeightMultiplier.ToString() + "%";
+
+                    currentJumpHeightMultiplier = jumpHeightMultiplier;
+                    nrJumpHeightMultiplier = i;
+
                     backgroundTintImages[i].enabled = true;
+                }
+
+                CheckJumpHeightMultiplier();
+
+                if (perksText[nrJumpHeightMultiplier].text != jumpHeightMultiplier + "%")
+                {
+                    if (jumpHeightMultiplier >= 100)
+                        perksText[nrJumpHeightMultiplier].color = Color.white;
+                    else
+                        perksText[nrJumpHeightMultiplier].color = redish;
+                    perksText[nrJumpHeightMultiplier].text = jumpHeightMultiplier.ToString() + "%";
                 }
             }
         }
     }
 
+    private void CheckUpdates()
+    {
 
+    }
     private Sprite CheckHealthMultiplier()
     {
         if (playerStats.healthMultiplier != 1)
