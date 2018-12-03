@@ -22,6 +22,8 @@ public class CharacterSelect : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         selectedSkin = Random.Range(0, 5);
+        if (!lobbyCam)
+            lobbyCam = FindObjectOfType<Camera>();
 
     }
 	
