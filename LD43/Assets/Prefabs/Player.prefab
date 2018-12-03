@@ -4746,7 +4746,7 @@ MonoBehaviour:
   playerCameraPrefab: {fileID: 1247865985724976, guid: a8cfd89f982d47940ac4cac4b183dad0,
     type: 2}
   weaponPrefabs:
-  - {fileID: 1410418614016956, guid: 67eedc0b8ce1c8745b94a67d9fd2aaa1, type: 2}
+  - {fileID: 1910044568627142, guid: be4b7e3334329ff4dace4ea39ce7a5f6, type: 2}
   - {fileID: 1678361613307080, guid: aa8c9faedf8cef043ae306751bc609ae, type: 2}
   - {fileID: 1788155410688512, guid: 71af87a55cae1b245b1a96355fa56cbb, type: 2}
   bulletPrefabs:

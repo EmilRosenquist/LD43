@@ -9,6 +9,7 @@ public class Pistol : Wepond {
     [SerializeField] private bool unlimitedAmmo = false;
     [SerializeField] private float shootSpeed = 0.3f;
     [SerializeField] private float reloadSpeed = 1f;
+    private AudioSource audioSource;
     private bool reloading = false;
     private Timer timer;
     private Timer reloadTimer;
