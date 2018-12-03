@@ -36,7 +36,7 @@ public class Grenade : Wepond {
                 }
                 grenadeReleased = false;
                 grenadesThrown++;
-                reserveAmmo = numberOfGrenades;
+                reserveAmmo = numberOfGrenades - grenadesThrown;
                 anim.SetInteger("numberOfNades", numberOfGrenades - grenadesThrown);
             }
         }
