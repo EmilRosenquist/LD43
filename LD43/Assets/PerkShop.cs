@@ -22,6 +22,7 @@ public class PerkShop : MonoBehaviour {
     }
     public void ShowShop(Perks perksClass, PerkStruct t1, PerkStruct tierR, PerkStruct t2)
     {
+        gm = FindObjectOfType<GameManager>();
         perksHelper = perksClass;
         currentPerks.Add(t1);
         currentPerks.Add(tierR);
@@ -43,19 +44,20 @@ public class PerkShop : MonoBehaviour {
         currentPerks.Clear();
         perkCardsUI.SetActive(false);
     }
-    void BuyCard(int cardIndex)
+    public void BuyCard(int cardIndex)
     {
         if (!boughtThisRound[cardIndex])
         {
-            //Buy Card
             for(int i = 0; i < gm.playerList.Count; i++)
             {
                 if (gm.playerList[i].GetComponent<Player>().isLocalPlayer)
                 {
+            //Buy Card
+
                     gm.playerList[i].GetComponent<Player>().ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
                 }
             }
-            boughtThisRound[cardIndex] = false;
+            boughtThisRound[cardIndex] = true;
         }
     }
 }
