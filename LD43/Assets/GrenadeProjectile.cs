@@ -20,5 +20,4 @@ public class GrenadeProjectile : MonoBehaviour {
 
         Destroy(gameObject);
     }
-
 }

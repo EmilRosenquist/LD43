@@ -9,13 +9,18 @@ public class Grenade : Wepond {
     [SerializeField] private float torque = 1000;
 
     private bool grenadeReleased = false;
+    public int numberOfGrenades = 3;
+    private int grenadesThrown = 0;
 
-
+    void OnEnable()
+    {
+        GetComponent<Animator>().SetInteger("numberOfNades", numberOfGrenades - grenadesThrown);
+    }
 
     public override void Attack(Player player, Vector3 spawnPos, Vector3 direction)
     {
         Animator anim = GetComponent<Animator>();
-        if (!grenadeReleased)
+        if (!grenadeReleased && grenadesThrown < numberOfGrenades)
         {
             if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
             {
@@ -27,7 +32,9 @@ public class Grenade : Wepond {
                 {
                     mr.enabled = false;
                 }
-                grenadeReleased = true;
+                grenadeReleased = false;
+                grenadesThrown++;
+                anim.SetInteger("numberOfNades", numberOfGrenades - grenadesThrown);
             }
         }
       
@@ -76,5 +83,7 @@ public class Grenade : Wepond {
             mr.enabled = true;
         }
         grenadeReleased = false;
+        grenadesThrown = 0;
+        GetComponent<Animator>().SetInteger("numberOfNades", 1);
     }
 }
