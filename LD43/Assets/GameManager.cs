@@ -66,6 +66,8 @@ public class GameManager : NetworkBehaviour
             if (aliveList.Count < 2 && currentState == states.INGAME)
             {
                 currentState = states.ENDGAME;
+                if(isServer)
+                    aliveList[0].GetComponent<Player>().CmdAddWin();
                 //nextround
             }
 

@@ -39,6 +39,8 @@ public class Player : NetworkBehaviour{
     public string playerName;
 
     [SyncVar]
+    public int wins = 0;
+    [SyncVar]
     public int damageDone = 0;
     [SyncVar(hook = "OnChangeWeapon")]
     public int weaponId = 0;
@@ -216,6 +218,10 @@ public class Player : NetworkBehaviour{
     public void CmdResetStats(){
         health = maxHealth;
         RpcResetStats();
+    }
+    [Command]
+    public void CmdAddWin(){
+        wins += 1;
     }
     [ClientRpc]
     void RpcResetStats(){
