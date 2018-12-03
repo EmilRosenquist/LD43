@@ -4942,7 +4942,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100002, guid: a7b1a5f4e9f37094fb369f61a85ec4c1, type: 3}
+  - {fileID: 2100000, guid: b79e0c97c4c7d43479bfec5247bd225b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4998,6 +4998,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef3651c54b7ae6e45abbc7f00b9eae4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reserveAmmo: 0
+  infiniteAmmo: 0
+  loadedAmmo: 0
   maxLoadedAmmo: 7
   extraAmmo: 21
   unlimitedAmmo: 1
@@ -5018,7 +5021,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100004, guid: a7b1a5f4e9f37094fb369f61a85ec4c1, type: 3}
+  - {fileID: 2100000, guid: b79e0c97c4c7d43479bfec5247bd225b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -4911,6 +4911,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a0a0d5d561c8042a74182a776807a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reserveAmmo: 0
+  infiniteAmmo: 0
+  loadedAmmo: 0
   maxLoadedAmmo: 5
   shootSpeed: 2
 --- !u!137 &137230350877725358
@@ -4928,7 +4931,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100002, guid: 494fb13ae3e29d8418958fc8c98b2566, type: 3}
+  - {fileID: 2100000, guid: 6a852c712c1d0844699e5a1a2e12829e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
