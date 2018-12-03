@@ -361,32 +361,32 @@ public class HUD : MonoBehaviour {
 
     private Sprite CheckHealthMultiplier()
     {
-        healthMultiplier = playerStats.healthMultiplier * 100;
+        healthMultiplier = (int)(playerStats.healthMultiplier * 100);
         return healthSprite;
     }
 
 
     private Sprite CheckDamageMultiplier()
     {
-        damageMultiplier = playerStats.damageMultiplierMultiplier * 100;
+        damageMultiplier = (int)(playerStats.damageMultiplierMultiplier * 100);
         return damageSprite;
     }
 
     private Sprite CheckSpeedMultiplier()
     {
-       speedMultiplier = playerStats.speedMultiplier * 100;
+       speedMultiplier = (int)(playerStats.speedMultiplier * 100);
        return speedSprite;
     }
 
     private Sprite CheckSprintMultiplier()
     {
-        sprintMultiplier = playerStats.sprintMultiplier * 100;
+        sprintMultiplier = (int)(playerStats.sprintMultiplier * 100);
         return sprintSprite;
     }
 
     private Sprite CheckJumpHeightMultiplier()
     {
-        jumpHeightMultiplier = playerStats.jumpHeightMultiplier * 100;
+        jumpHeightMultiplier = (int)(playerStats.jumpHeightMultiplier * 100);
         return jumpHeightSprite;
     }
 }
