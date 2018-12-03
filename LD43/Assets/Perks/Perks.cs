@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class Perks : NetworkBehaviour{
-    private List<List<Ability>> goodAbilities;
-    private List<List<Ability>> badAbilities;
+    private List<List<Ability>> goodAbilities = new List<List<Ability>>();
+    private List<List<Ability>> badAbilities = new List<List<Ability>>();
     private List<Ability> tierOneGoodAbilites = new List<Ability>();
     private List<Ability> tierOneBadAbilites = new List<Ability>();
 
