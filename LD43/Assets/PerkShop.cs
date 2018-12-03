@@ -125,7 +125,7 @@ public class PerkShop : MonoBehaviour {
         }else if(cardIndex == 2)
         {
             string text;
-            text = cardZero[0].text;
+            text = cardTwo[0].text;
             cardTwo[0].text = cardTwo[1].text;
             cardTwo[1].text = text;
         }
