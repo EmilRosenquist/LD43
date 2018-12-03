@@ -8,6 +8,7 @@ public class PlayerScoreScreen : MonoBehaviour {
     public NetworkInstanceId IDtoTrack;
     public Text nameText;
     public Text scoreText;
+    public Text winText;
     public GameManager gm;
 
     private void Start()
@@ -27,7 +28,8 @@ public class PlayerScoreScreen : MonoBehaviour {
                 if(IDtoTrack == gm.playerList[i].GetComponent<Player>().netId)
                 {
                     nameText.text = gm.playerList[i].GetComponent<Player>().playerName;
-                    scoreText.text = gm.playerList[i].GetComponent<Player>().damageDone.ToString();
+                    scoreText.text = "Damage done: " + gm.playerList[i].GetComponent<Player>().damageDone.ToString();
+                    winText.text = "Wins: " + gm.playerList[i].GetComponent<Player>().wins.ToString();
                 }
             }
         }
