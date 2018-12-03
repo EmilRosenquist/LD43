@@ -34,10 +34,41 @@ public class AutoRifle : Wepond
     {
         if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("MiddleState"))
         {
-            reserveAmmo -= (maxLoadedAmmo - loadedAmmo);
-            loadedAmmo = maxLoadedAmmo;
+            //reserveAmmo -= (maxLoadedAmmo - loadedAmmo);
+            //if (reserveAmmo >= maxLoadedAmmo)
+            //{
+            //    loadedAmmo = maxLoadedAmmo;
+            //}
+            //else
+            //{
+            //    loadedAmmo = reserveAmmo;
+            //}
+
+            //reserveAmmo = Mathf.Clamp(reserveAmmo, 0, extraAmmo);
+            //Debug.Log(reserveAmmo);
+
+            if (reserveAmmo == 0) return;
+            int ammoToReload = maxLoadedAmmo - loadedAmmo;
+            if (ammoToReload > reserveAmmo) ammoToReload = reserveAmmo;
+
+            loadedAmmo += ammoToReload;
+            reserveAmmo -= ammoToReload;
             reserveAmmo = Mathf.Clamp(reserveAmmo, 0, extraAmmo);
+
+
+            //if (extraAmmo == 0) return;
+            //fireNext = Time.time + ws.reloadTime;
+            //int ammoToReload = ws.ammoCapacity - magAmmo;
+            //if (ammoToReload > extraAmmo) ammoToReload = extraAmmo;
+
+
+            //magAmmo += ammoToReload;
+            //extraAmmo -= ammoToReload;
+            //extraAmmo = Mathf.Clamp(extraAmmo, 0, ws.extraAmmoCapacity);
+
+
             GetComponent<Animator>().SetInteger("Bullets", maxLoadedAmmo);
+            GetComponent<Animator>().SetInteger("ReserveAmmo", reserveAmmo);
             reloading = false;
         }
 
