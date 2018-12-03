@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114942118615509330}
   - component: {fileID: 114585538662405678}
   m_Layer: 9
-  m_Name: Bullet
+  m_Name: BulletAutoRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -210,22 +210,22 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 37
-    i1: 111
-    i2: 248
-    i3: 75
-    i4: 221
-    i5: 2
-    i6: 173
-    i7: 100
-    i8: 9
-    i9: 17
-    i10: 131
-    i11: 171
-    i12: 146
-    i13: 7
-    i14: 144
-    i15: 39
+    i0: 187
+    i1: 179
+    i2: 204
+    i3: 83
+    i4: 129
+    i5: 247
+    i6: 227
+    i7: 196
+    i8: 73
+    i9: 236
+    i10: 58
+    i11: 26
+    i12: 153
+    i13: 226
+    i14: 191
+    i15: 147
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
 --- !u!135 &135361387694036972
