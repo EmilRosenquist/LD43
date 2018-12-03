@@ -85,7 +85,6 @@ public class Player : NetworkBehaviour{
         OnChangeWeapon(weaponId);
         CmdUpdateMaxHealth(1.0f);
         CmdResetStats();
-
     }
     void Update(){
         if (!isLocalPlayer){
@@ -249,6 +248,16 @@ public class Player : NetworkBehaviour{
         health = maxHealth;
         RpcResetStats();
     }
+    [ClientRpc]
+    void RpcResetStats()
+    {
+        if (weaponHolder == null)
+            return;
+        for (int i = 0; i < weaponHolder.childCount; i++)
+        {
+            weaponHolder.GetChild(i).GetComponent<Wepond>().Reset();
+        }
+    }
     [Command]
     public void CmdAddWin(){
         wins += 1;
@@ -265,15 +274,13 @@ public class Player : NetworkBehaviour{
         money = 0;
         wins = 0;
         damageDone = 0;
-        if(isLocalPlayer)
+        if (isLocalPlayer){
             playerStats.Reset();
-    }
-    [ClientRpc]
-    void RpcResetStats(){
-        if (weaponHolder == null)
-            return;
-        for (int i = 0; i < weaponHolder.childCount; i++){
-            weaponHolder.GetChild(i).GetComponent<Wepond>().Reset();
+            CmdUpdateMaxHealth(1.0f);
+            CmdUpdateDamageMultiplier(1.0f);
+            CmdUpdateSpeedMultiplier(1.0f);
+            CmdUpdateSprintMultiplier(1.0f);
+            CmdUpdateJumpHeightMultiplier(1.0f);
         }
     }
 
