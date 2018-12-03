@@ -32,7 +32,7 @@ public class Pistol : Wepond {
                 //play anim and reload gun after x time
                 if (reserveAmmo > maxLoadedAmmo)
                 {
-                    reserveAmmo -= maxLoadedAmmo;
+                    reserveAmmo -= maxLoadedAmmo - loadedAmmo;
                     loadedAmmo = maxLoadedAmmo;
                 }
                 else

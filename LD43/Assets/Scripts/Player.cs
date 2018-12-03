@@ -94,10 +94,19 @@ public class Player : NetworkBehaviour{
             if (Input.GetMouseButton(0)){
                 Attack();
             }
-            else if (Input.GetMouseButtonDown(1)){
-                CmdChangeWeapon((weaponId == 0) ? 1 : 0);
+            else if (Input.GetKeyDown(KeyCode.Alpha1)){
+                CmdChangeWeapon(0);
+            }else if (Input.GetKeyDown(KeyCode.Alpha2)){
+                if(weaponPrefabs.Count >= 2)
+                    CmdChangeWeapon(1);
+            }else if (Input.GetKeyDown(KeyCode.Alpha3)){
+                if (weaponPrefabs.Count >= 3)
+                    CmdChangeWeapon(2);
+            }else if (Input.GetKeyDown(KeyCode.R)){
+                weaponHolder.GetChild(weaponId).GetComponentInChildren<Wepond>().ReloadAmmo();
             }
-        }else{
+        }
+        else{
         }
     }
     void Attack(){
