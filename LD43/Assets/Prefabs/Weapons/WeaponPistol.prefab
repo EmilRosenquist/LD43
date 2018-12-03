@@ -2349,6 +2349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4161588662267748}
   - component: {fileID: 95167846961565048}
+  - component: {fileID: 114958305128062244}
   m_Layer: 2
   m_Name: WeaponPistol
   m_TagString: GUNS
@@ -2931,7 +2932,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1910044568627142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.8, z: 0.55}
+  m_LocalPosition: {x: 0, y: -2.7, z: 0.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4763597103337336}
@@ -4986,6 +4987,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114958305128062244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1910044568627142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef3651c54b7ae6e45abbc7f00b9eae4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLoadedAmmo: 7
+  extraAmmo: 21
+  unlimitedAmmo: 0
+  shootSpeed: 0.3
+  reloadSpeed: 1
 --- !u!137 &137725952017919198
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
