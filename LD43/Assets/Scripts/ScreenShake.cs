@@ -20,7 +20,7 @@ public class ScreenShake : MonoBehaviour
 
     void Start()
     {
-        originalPosition = transform.position;
+        originalPosition = transform.localPosition;
     }
 
 
@@ -43,8 +43,6 @@ public class ScreenShake : MonoBehaviour
         float speed = Pistol.GetSpeed();
         float elapsedTime = 0.0f;
 
-        originalPosition = transform.position;
-
         while (elapsedTime < duration)
         {
 
@@ -62,7 +60,7 @@ public class ScreenShake : MonoBehaviour
         }
         
         pistolShake = false;
-        transform.position = originalPosition;
+        transform.localPosition = originalPosition;
     }
 
     public IEnumerator RocketLauncherShake()

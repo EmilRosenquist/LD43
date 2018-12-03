@@ -52,6 +52,7 @@ public class Player : NetworkBehaviour{
     private void Awake()
     {
         smr = GetComponentInChildren<SkinnedMeshRenderer>();
+        playerStats = gameObject.AddComponent<PlayerStats>();
     }
 
     void Start() { 
@@ -62,7 +63,6 @@ public class Player : NetworkBehaviour{
             OnChangeSkin(skinIndex);
             return;
         }
-        playerStats = gameObject.AddComponent<PlayerStats>();
         SkinnedMeshRenderer[] tmp = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (SkinnedMeshRenderer s in tmp)
         {
