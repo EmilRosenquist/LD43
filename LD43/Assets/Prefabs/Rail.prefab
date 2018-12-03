@@ -185,6 +185,9 @@ MonoBehaviour:
   velocity: 0
   dmg: 101
   shooter: {fileID: 0}
+  SoundEmitter: {fileID: 1463607624107240, guid: 643ca9345f32f034383d22c27d20fb1b,
+    type: 2}
+  hitHitclip: {fileID: 8300000, guid: 9249bbb5bf747f54faa2334430df2d65, type: 3}
 --- !u!114 &114980745753780450
 MonoBehaviour:
   m_ObjectHideFlags: 1
