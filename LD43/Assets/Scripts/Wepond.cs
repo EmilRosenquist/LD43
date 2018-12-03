@@ -4,9 +4,9 @@ using UnityEngine;
 
 
 public abstract class Wepond : MonoBehaviour {
-    protected int reserveAmmo;
-    protected bool infiniteAmmo = false;
-    protected int loadedAmmo;
+    public int reserveAmmo;
+    public bool infiniteAmmo = false;
+    public int loadedAmmo;
 
     public abstract void Attack(Player player, Vector3 spawnPos, Vector3 direction);
     public abstract bool ReloadAmmo();
