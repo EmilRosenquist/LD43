@@ -2,140 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScreenShake : MonoBehaviour {
-
-    public bool shakeScreen;
+public class ScreenShake : MonoBehaviour
+{
     public bool pistolShake;
     public bool rocketLauncherShake;
     public bool explosionShake;
 
-    public float duration1;
-    public float strength1;
-    public float duration2;
-    public float speed;
+    [SerializeField] private ScreenShakes Pistol;
+    [SerializeField] private ScreenShakes RocketLauncher;
+    [SerializeField] private ScreenShakes Explosion;
+    
 
     private Vector3 originalPosition;
-
     private Vector3 targetPosition;
-
     private GameObject explosion;
 
 
-    void Start ()
+    void Start()
     {
         originalPosition = transform.position;
-        targetPosition = new Vector3(originalPosition.x, originalPosition.y, 100f);
     }
 
 
     void Update()
     {
-        if (pistolShake)        
+        if (pistolShake)
             StartCoroutine(PistolShake());
-        
 
         if (rocketLauncherShake)
-            StartCoroutine(RocketLauncherShake());             
-      
-        
-        if (explosionShake)        
+            StartCoroutine(RocketLauncherShake());
+
+        if (explosionShake)
             StartCoroutine(ExplosionShake());
-        
     }
-    public IEnumerator CameraShake1()
-    {
-        //Vector3 originalPosition = transform.position;
-        float elapsedTime = 0.0f;
-
-        Debug.Log(originalPosition);
-       
-
-            while (elapsedTime < duration1)
-            {
-                //Debug.Log("ElapsedTime: " + elapsedTime);
-                float x = Random.Range(-0.1f, 0.1f) * strength1;
-                float y = Random.Range(-0.1f, 0.1f) * strength1;
-                transform.localPosition = new Vector3(x, y, 0) + originalPosition;
-
-                elapsedTime += Time.deltaTime;
-
-                yield return null;
-            }
-        
-
-        shakeScreen = false;
-        transform.position = originalPosition;
-        Debug.Log("END" + originalPosition);
-
-
-    }
-
-    public IEnumerator CameraShake2()
-    {
-        //Vector3 originalPosition = transform.position;
-        Debug.Log("Original position: " + originalPosition);
-        float elapsedTime = 0.0f;
-
-
-        
-            //Debug.Log("ElapsedTime: " + elapsedTime);
-
-            //Vector3 targetPosition = new Vector3(0, 0, -1);
-            float velocity = speed * Time.deltaTime;
-
-        while (elapsedTime < duration1)
-        {
-            
-            float move = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, targetPosition, move);
-
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        elapsedTime = 0.0f;
-
-        while (elapsedTime < duration1)
-        {
-
-            float move = speed * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, originalPosition, move);
-
-            elapsedTime += Time.deltaTime;
-
-            yield return null;
-        }
-
-        //while (transform.position != targetPosition)
-        //{
-        //    float move = speed * Time.deltaTime;
-        //    transform.position = Vector3.MoveTowards(transform.position, targetPosition, move);
-
-        //    elapsedTime += Time.deltaTime;
-
-        //    yield return null;
-
-        //}
-
-
-        shakeScreen = false;
-        //transform.position = new Vector3 (0, 0, 0);
-        Debug.Log("END" + originalPosition);
-
-
-    }
-
 
     public IEnumerator PistolShake()
     {
-        float duration = 0.1f;
-        float strength = 0.2f;
-        float speed = 3f;
+        float duration = Pistol.GetDuration();
+        float strength = Pistol.GetStrenght();
+        float speed = Pistol.GetSpeed();
         float elapsedTime = 0.0f;
-
-        Debug.Log(originalPosition);
-
 
         while (elapsedTime < duration)
         {
@@ -147,25 +53,22 @@ public class ScreenShake : MonoBehaviour {
             float move = speed * Time.deltaTime;
 
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, move);
-            
+
             elapsedTime += Time.deltaTime;
 
             yield return null;
         }
-
         
-        shakeScreen = false;
         pistolShake = false;
         transform.position = originalPosition;
     }
 
     public IEnumerator RocketLauncherShake()
     {
-        float duration = 0.2f;
-        float strength = 0.2f;
-        float speed = 3f;
+        float duration = RocketLauncher.GetDuration();
+        float strength = RocketLauncher.GetStrenght();
+        float speed = RocketLauncher.GetSpeed();
         float elapsedTime = 0.0f;
-        
 
         while (elapsedTime < duration)
         {
@@ -194,29 +97,30 @@ public class ScreenShake : MonoBehaviour {
 
             yield return null;
         }
-
-
-        shakeScreen = false;
+               
         rocketLauncherShake = false;
         transform.position = originalPosition;
-        Debug.Log("END" + originalPosition);
     }
 
     public IEnumerator ExplosionShake()
-    {        
-        explosion = GameObject.Find("Expl");
-        
+    {
+        float duration = Explosion.GetDuration();
+        float strength = Explosion.GetStrenght();
+        float speed = Explosion.GetSpeed();
+
+        explosion = GameObject.Find("Particle_GrenadeExplosion(Clone)"); //find explosion 
+
 
         Vector3 dir = explosion.transform.position - transform.position;
         dir = new Vector3(Mathf.Abs(dir.x), Mathf.Abs(dir.y), Mathf.Abs(dir.z));
 
-        float explosionStrenght = strength1 / (dir.x + dir.z);
+        float explosionStrenght = strength / (dir.x + dir.z);
 
-        Debug.Log("explosionStrenght " + explosionStrenght);
+        //Debug.Log("explosionStrenght " + explosionStrenght);
 
         float elapsedTime = 0.0f;
 
-        while (elapsedTime < duration1)
+        while (elapsedTime < duration)
         {
             float x = Random.Range(-1f, 1f) * explosionStrenght;
             float y = Random.Range(-1f, 1f) * explosionStrenght;
@@ -230,11 +134,30 @@ public class ScreenShake : MonoBehaviour {
             yield return null;
         }
 
-        shakeScreen = false;
         explosionShake = false;
         transform.position = originalPosition;
-        Debug.Log("END" + originalPosition);
+    }
+
+
+
+    [System.Serializable]
+    public class ScreenShakes
+    {
+        [SerializeField] private float duration;
+        [SerializeField] private float strenght;
+        [SerializeField] private float speed;
+
+        public float GetDuration()
+        {
+            return duration;
+        }
+        public float GetStrenght()
+        {
+            return strenght;
+        }
+        public float GetSpeed()
+        {
+            return speed;
+        }
     }
 }
-
-
