@@ -75,7 +75,7 @@ public class PerkShop : MonoBehaviour {
                         overlays[i].color = c;
                         boughtThisRound = true;
                     }
-                    else if (cardIndex == 1 &&p.money >= 50)
+                    if (cardIndex == 1 && p.money >= 50)
                     {
                         p.money -= 50;
                         moneyText.text = "Money: " + p.money;
@@ -83,7 +83,7 @@ public class PerkShop : MonoBehaviour {
                         overlays[i].color = c;
                         boughtThisRound = true;
                     }
-                    else if (cardIndex == 2 && p.money >= 200)
+                    if (cardIndex == 2 && p.money >= 200)
                     {
                         p.money -= 200;
                         moneyText.text = "Money: " + p.money;

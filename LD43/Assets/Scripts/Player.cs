@@ -68,7 +68,7 @@ public class Player : NetworkBehaviour{
         {
             if (s.gameObject.CompareTag("char_mesh"))
             {
-                s.gameObject.SetActive(false);
+                s.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
             }
         }
         CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);

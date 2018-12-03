@@ -24,6 +24,19 @@ public class CharacterMovement : NetworkBehaviour
     private void Update()
     {
         am.SetFloat("MoveSpeed", cc.velocity.magnitude);
+        Vector3 direction = cc.velocity;
+        direction.y = 0;
+        direction.Normalize();
+        float angle = Mathf.Rad2Deg * (Mathf.Acos(Vector3.Dot(direction, transform.forward)));
+        Debug.Log(angle);
+        if (angle == float.NaN)
+        {
+            am.SetFloat("MoveAngle", 0);
+        }
+        else
+        {
+            am.SetFloat("MoveAngle", angle);
+        }
         if (!isLocalPlayer)
             return;
 
