@@ -16,6 +16,7 @@ public class Player : NetworkBehaviour{
     [SyncVar]
     public int health;
     public int baseHealth = 100;
+    [SyncVar]
     private int maxHealth;
     [SyncVar]
     public float speed;
@@ -58,7 +59,6 @@ public class Player : NetworkBehaviour{
             OnChangeSkin(skinIndex);
             return;
         }
-        maxHealth = baseHealth;
         playerStats = gameObject.AddComponent<PlayerStats>();
         SkinnedMeshRenderer[] tmp = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (SkinnedMeshRenderer s in tmp)
@@ -79,6 +79,7 @@ public class Player : NetworkBehaviour{
                 g.SetActive(false);
         }
         OnChangeWeapon(weaponId);
+        CmdUpdateMaxHealth(1.0f);
         CmdResetStats();
 
     }
