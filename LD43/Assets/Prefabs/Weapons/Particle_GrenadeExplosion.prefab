@@ -86,7 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosion: {fileID: 198984230920435500}
   radius: 5
-  damage: 30
+  damage: 70
   soundEmmiter: {fileID: 1463607624107240, guid: 643ca9345f32f034383d22c27d20fb1b,
     type: 2}
   sound: {fileID: 8300000, guid: 3a8408a51abbe624f9b1e0f5d8d42f07, type: 3}
