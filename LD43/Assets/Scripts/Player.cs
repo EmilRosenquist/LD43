@@ -8,7 +8,7 @@ public class Player : NetworkBehaviour{
     public List<GameObject> weaponPrefabs;
     public List<GameObject> bulletPrefabs;
     public List<Texture> skins;
-    private Camera playerCamera;
+    public Camera playerCamera;
     private Transform weaponHolder;
     private SkinnedMeshRenderer smr;
     private PlayerStats playerStats;
