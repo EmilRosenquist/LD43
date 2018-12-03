@@ -23,7 +23,6 @@ public class GrenadeExplosion : MonoBehaviour {
 	void Update ()
     {
         ExplosionDamage();
-        Debug.Log("past ExplosionDamage()");
 
         if (explosion.isPlaying)
             gameObject.SetActive(true);

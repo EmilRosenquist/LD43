@@ -51,7 +51,6 @@ public class GameManager : NetworkBehaviour
 
         while (true)
         {
-            Debug.Log(currentState);
             updateLists();
             if (playerList.Count <= 1)
             {

@@ -121,7 +121,6 @@ public class Player : NetworkBehaviour{
         if(health <= 0){
             isAlive = false;
             CmdToggleSpectatorMode(false);
-            Debug.Log("Dead!");
         }
     }
     [Command]
@@ -210,13 +209,13 @@ public class Player : NetworkBehaviour{
 
     [Command]
     public void CmdToggleSpectatorMode(bool toggle){
+        isAlive = toggle;
         RpcToggleSpectatorMode(toggle);
     }
     [ClientRpc]
     void RpcToggleSpectatorMode(bool toggle){
         if (!isLocalPlayer)
             return;
-        isAlive = toggle;
         transform.GetChild(0).gameObject.SetActive(toggle);
         GetComponent<CharacterController>().enabled = toggle;
         smr.enabled = toggle;

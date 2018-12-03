@@ -26,7 +26,6 @@ public class Bullet : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         //Spela upp ljud som indikerar träff
-        Debug.Log(other.gameObject.name);
         if (!hasHit && other.gameObject.GetComponentInParent<Player>() != null && other.gameObject.GetComponentInParent<Player>() != shooter)
         {
             hasHit = true;
