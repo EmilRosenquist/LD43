@@ -52,7 +52,7 @@ public class PerkShop : MonoBehaviour {
             {
                 if (gm.playerList[i].GetComponent<Player>().isLocalPlayer)
                 {
-            //Buy Card
+                    //Buy Card
 
                     gm.playerList[i].GetComponent<Player>().ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
                 }

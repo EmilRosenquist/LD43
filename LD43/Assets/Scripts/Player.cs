@@ -181,6 +181,7 @@ public class Player : NetworkBehaviour{
     }
     void OnChangeWeapon(int weaponId){
         //weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("GUNS").GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture = skins[skinIndex];
         this.weaponId = weaponId;
         //weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
     }
@@ -201,7 +202,7 @@ public class Player : NetworkBehaviour{
     }
     void OnChangeSkin(int skinIndex)
     {
-       smr.material.mainTexture = skins[skinIndex];
+        smr.material.mainTexture = skins[skinIndex];
     }
 
     [Command]

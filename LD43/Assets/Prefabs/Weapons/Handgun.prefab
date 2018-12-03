@@ -2005,7 +2005,7 @@ GameObject:
   - component: {fileID: 114448045081714396}
   m_Layer: 2
   m_Name: Handgun
-  m_TagString: Untagged
+  m_TagString: GUNS
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
