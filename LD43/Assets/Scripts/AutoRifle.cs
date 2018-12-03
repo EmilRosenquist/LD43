@@ -23,9 +23,9 @@ public class AutoRifle : Wepond
 
     private void OnEnable()
     {
-        if(loadedAmmo == 0)
+        reloading = false;
+        if (loadedAmmo == 0)
         {
-            reloading = false;
             ReloadAmmo();
         }
     }
