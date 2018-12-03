@@ -20,7 +20,7 @@ public class Perks : NetworkBehaviour{
         FillTierTwoGoodAbilities();
         FillTierTwoBadAbilities();
         FillTierThreeGoodAbilities();
-        FillTierTwoBadAbilities();
+        FillTierThreeBadAbilities();
         goodAbilities.Add(tierOneGoodAbilites);
         goodAbilities.Add(tierTwoGoodAbilites);
         goodAbilities.Add(tierThreeGoodAbilites);
@@ -40,13 +40,15 @@ public class Perks : NetworkBehaviour{
             return ps;
         }
         if(tier == 1){
-            ps.goodTier = ps.badTier = 1;
+            ps.goodTier = 1;
+            ps.badTier = 1;
             ps.goodIndex = Random.Range(0, tierOneGoodAbilites.Count);
             ps.badIndex = Random.Range(0, tierOneBadAbilites.Count);
             return ps;
         }
         if(tier == 2){
-            ps.goodTier = ps.badTier = 2;
+            ps.goodTier = 2;
+            ps.badTier = 2;
             ps.goodIndex = Random.Range(0, tierTwoGoodAbilites.Count);
             ps.badIndex = Random.Range(0, tierTwoBadAbilites.Count);
             return ps;
