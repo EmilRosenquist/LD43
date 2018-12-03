@@ -16,6 +16,8 @@ public class Bullet : MonoBehaviour {
     {
         set
         {
+            Vector3 delta = value.normalized;
+            transform.LookAt(transform.position + delta);
             moveDir = value.normalized;
         }
     }

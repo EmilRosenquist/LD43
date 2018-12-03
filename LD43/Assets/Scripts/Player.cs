@@ -222,7 +222,7 @@ public class Player : NetworkBehaviour{
             return;
         transform.GetChild(0).gameObject.SetActive(toggle);
         GetComponent<CharacterController>().enabled = toggle;
-        //smr.enabled = toggle;
+        smr.enabled = toggle;
         weaponHolder.GetChild(weaponId).gameObject.SetActive(toggle);
     }
     [Command]
