@@ -4863,9 +4863,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1506622f32768b244939ee2db4cf4bba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  reserveAmmo: 0
+  infiniteAmmo: 0
+  loadedAmmo: 0
   maxLoadedAmmo: 30
   extraAmmo: 90
-  timeBetweenShots: 0.05
+  timeBetweenShots: 0.1
   timeToReload: 2.5
 --- !u!137 &137029139741169226
 SkinnedMeshRenderer:
