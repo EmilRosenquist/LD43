@@ -11,19 +11,24 @@ public class Grenade : Wepond {
     private bool grenadeReleased = false;
 
 
+
     public override void Attack(Player player, Vector3 spawnPos, Vector3 direction)
     {
-
+        Animator anim = GetComponent<Animator>();
         if (!grenadeReleased)
         {
-            //temp direction, Should be based on camera direction
-            player.CmdSpawnGranade(2, transform.position, transform.forward * force, transform.right * torque, transform.rotation);
-            //temp code for disabling child meshes
-            foreach (MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
+            if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
             {
-                mr.enabled = false;
+                anim.SetTrigger("Throw");
+                //temp direction, Should be based on camera direction
+                player.CmdSpawnGranade(2, transform.GetChild(0).transform.position, transform.forward * force, transform.right * torque, transform.rotation);
+                //temp code for disabling child meshes
+                foreach (MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
+                {
+                    mr.enabled = false;
+                }
+                grenadeReleased = true;
             }
-            grenadeReleased = true;
         }
       
     }
