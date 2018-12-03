@@ -134,8 +134,8 @@ MonoBehaviour:
   rocketLauncherShake: 0
   explosionShake: 0
   Pistol:
-    duration: 0.1
-    strenght: 0.2
+    duration: 0.05
+    strenght: 0.05
     speed: 3
   RocketLauncher:
     duration: 0.2

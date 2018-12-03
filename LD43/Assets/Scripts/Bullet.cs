@@ -11,7 +11,8 @@ public class Bullet : MonoBehaviour {
     public Player shooter;
     private bool isHit = false;
     private bool hasHit = false;
-    AudioSource audioSource;
+    [SerializeField] GameObject SoundEmitter;
+    [SerializeField] AudioClip hitHitclip;
 
     public Vector3 MoveDir
     {
@@ -34,6 +35,15 @@ public class Bullet : MonoBehaviour {
             hasHit = true;
             other.gameObject.GetComponentInParent<Player>().TakeDamage((int)(dmg * shooter.damageMultiplier));
             shooter.DidDamage((int)(dmg * shooter.damageMultiplier));
+
+            //send hitsound to player
+            if (shooter.isLocalPlayer)
+            {
+                GameObject go = Instantiate(SoundEmitter, shooter.transform.position, Quaternion.identity);
+                go.GetComponent<AudioSource>().PlayOneShot(hitHitclip);
+                Destroy(go, 0.3f);
+                FindObjectOfType<CrossHair>().ShowHit();
+            }
         }
         if (other.gameObject.GetComponentInParent<Player>() == null){
             Destroy(gameObject);
