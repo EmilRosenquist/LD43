@@ -31,6 +31,7 @@ public class Player : NetworkBehaviour{
     public float damageMultiplier = 1.0f;
     [SyncVar]
     public int money = 0;
+    [SyncVar]
     public float moneyMultiplier = 1.0f;
 
     [SyncVar(hook = "OnChangeSkin")]
@@ -180,10 +181,10 @@ public class Player : NetworkBehaviour{
         weaponId = newId;
     }
     void OnChangeWeapon(int weaponId){
-        //weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
+        weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
+        weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
         GameObject.FindGameObjectWithTag("GUNS").GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture = skins[skinIndex];
         this.weaponId = weaponId;
-        //weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
     }
     [Command]
     void CmdChangeName(string newPlayerName)
