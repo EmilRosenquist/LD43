@@ -43,6 +43,8 @@ public class ScreenShake : MonoBehaviour
         float speed = Pistol.GetSpeed();
         float elapsedTime = 0.0f;
 
+        originalPosition = transform.position;
+
         while (elapsedTime < duration)
         {
 

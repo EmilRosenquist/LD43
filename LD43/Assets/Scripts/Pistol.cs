@@ -75,6 +75,7 @@ public class Pistol : Wepond {
                     {
                         loadedAmmo--;
                         player.CmdSpawnBullet(0, spawnPos, direction);
+                        StartCoroutine(player.playerCamera.GetComponent<ScreenShake>().PistolShake());
                         timer.reset();
                     }
                 }

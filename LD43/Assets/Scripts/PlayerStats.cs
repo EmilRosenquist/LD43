@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour {
     //Basic stats
-    public float healthMultiplier = 1.0f;
-    public float damageMultiplierMultiplier = 1.0f;
+    public float healthMultiplier = 4.0f;
+    public float damageMultiplierMultiplier = 3.0f;
     //MovementStats
     public float speedMultiplier = 1.0f;
     public float sprintMultiplier = 1.0f;
