@@ -42,14 +42,14 @@ public class ScreenShake : MonoBehaviour
         float strength = Pistol.GetStrenght();
         float speed = Pistol.GetSpeed();
         float elapsedTime = 0.0f;
-
+        originalPosition = transform.localPosition;
         while (elapsedTime < duration)
         {
 
             float x = Random.Range(-0.1f, 0.1f) * strength;
             float y = Random.Range(0f, 0.5f) * strength;
 
-            targetPosition = new Vector3(x, y, -0.1f) + originalPosition;
+            targetPosition = new Vector3(x, y, -0.1f) + transform.position + originalPosition;
             float move = speed * Time.deltaTime;
 
             transform.position = Vector3.MoveTowards(transform.position, targetPosition, move);
