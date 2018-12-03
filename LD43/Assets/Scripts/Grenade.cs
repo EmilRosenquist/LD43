@@ -16,6 +16,7 @@ public class Grenade : Wepond {
 
         if (!grenadeReleased)
         {
+            //temp direction, Should be based on camera direction
             player.CmdSpawnGranade(2, transform.position, transform.forward * force, transform.right * torque, transform.rotation);
             //temp code for disabling child meshes
             foreach (MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
