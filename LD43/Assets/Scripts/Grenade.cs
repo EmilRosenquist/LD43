@@ -26,7 +26,7 @@ public class Grenade : Wepond {
             {
                 anim.SetTrigger("Throw");
                 //temp direction, Should be based on camera direction
-                player.CmdSpawnGranade(2, transform.GetChild(0).transform.position, transform.forward * force, transform.right * torque, transform.rotation);
+                StartCoroutine(SpawnNade(player, spawnPos, direction));
                 //temp code for disabling child meshes
                 foreach (MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
                 {
@@ -38,6 +38,10 @@ public class Grenade : Wepond {
             }
         }
       
+    }
+    IEnumerator SpawnNade(Player player, Vector3 spawnPos, Vector3 direction){
+        yield return new WaitForSeconds(1f);
+        player.CmdSpawnGranade(2, transform.GetChild(0).transform.position, transform.forward * force, transform.right * torque, transform.rotation);
     }
 
     public override int CheckMagasine()
