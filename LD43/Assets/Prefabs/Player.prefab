@@ -4145,7 +4145,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1791562993764994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.131829, y: 26.539875, z: -14.137278}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4017507568456032}
@@ -4747,6 +4747,7 @@ MonoBehaviour:
     type: 2}
   weaponPrefabs:
   - {fileID: 1752092578494808, guid: e913cec5634d6cf4c80c2506650e3e4a, type: 2}
+  - {fileID: 1671103055047854, guid: 900cc7c82a590a24a83958a7b702916f, type: 2}
   bulletPrefabs:
   - {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027, type: 2}
   - {fileID: 1912327147758926, guid: 90cad53e30ef7354681cc9d9c318fec1, type: 2}
@@ -4757,6 +4758,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 963d92a2372ee944c8eba1911b3fd145, type: 3}
   - {fileID: 2800000, guid: 223dd090b7ff3df44bd21b93789d74de, type: 3}
   - {fileID: 2800000, guid: 0be420d0c5b4e1d4cb25347a2128b4bc, type: 3}
+  playerCamera: {fileID: 0}
   health: 100
   baseHealth: 100
   speed: 5
@@ -4770,6 +4772,7 @@ MonoBehaviour:
   moneyMultiplier: 1
   skinIndex: 0
   playerName: 
+  wins: 0
   damageDone: 0
   weaponId: 0
   isAlive: 1
