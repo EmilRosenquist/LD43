@@ -9,20 +9,29 @@ public class PerkShop : MonoBehaviour {
     [SerializeField] private GameObject perkCardsUI;
     [SerializeField] private Text[] cardsOne;
     [SerializeField] private Text[] cardsTwo;
-    List<bool> boughtThisRound = new List<bool>();
+    [SerializeField] private Text timerText;
+    [SerializeField] private Text moneyText;
+    [SerializeField] private List<Image> overlays;
+    bool boughtThisRound = false;
+
+    Color c = new Color(0, 0.8301887f, 0.01823294f, 0.5f);
 
     GameManager gm;
 
     private void Start()
     {
         gm = FindObjectOfType<GameManager>();
-        boughtThisRound.Add(false);
-        boughtThisRound.Add(false);
-        boughtThisRound.Add(false);
     }
     public void ShowShop(Perks perksClass, PerkStruct t1, PerkStruct tierR, PerkStruct t2)
     {
         gm = FindObjectOfType<GameManager>();
+        for (int i = 0; i < gm.playerList.Count; i++)
+        {
+            if (gm.playerList[i].GetComponent<Player>().isLocalPlayer)
+            {
+                moneyText.text ="Money: " + gm.playerList[i].GetComponent<Player>().money;
+            }
+        }
         perksHelper = perksClass;
         currentPerks.Add(t1);
         currentPerks.Add(tierR);
@@ -38,26 +47,58 @@ public class PerkShop : MonoBehaviour {
     
     public void HideShop()
     {
-        boughtThisRound[0] = false;
-        boughtThisRound[1] = false;
-        boughtThisRound[2] = false;
+        boughtThisRound = false;
         currentPerks.Clear();
+        overlays[0].color = Color.clear;
+        overlays[1].color = Color.clear;
+        overlays[2].color = Color.clear;
+        timerText.text = "";
+        moneyText.text = "";
         perkCardsUI.SetActive(false);
     }
     public void BuyCard(int cardIndex)
     {
-        if (!boughtThisRound[cardIndex])
+        if (!boughtThisRound)
         {
-            for(int i = 0; i < gm.playerList.Count; i++)
+            
+            for (int i = 0; i < gm.playerList.Count; i++)
             {
                 if (gm.playerList[i].GetComponent<Player>().isLocalPlayer)
                 {
+                    Player p = gm.playerList[i].GetComponent<Player>();
                     //Buy Card
-
-                    gm.playerList[i].GetComponent<Player>().ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
+                    if (cardIndex == 0 && p.money >= 100)
+                    {
+                        p.money -= 100;
+                        moneyText.text = "Money: " + p.money;
+                        p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
+                        overlays[i].color = c;
+                        boughtThisRound = true;
+                    }
+                    else if (cardIndex == 1 &&p.money >= 50)
+                    {
+                        p.money -= 50;
+                        moneyText.text = "Money: " + p.money;
+                        p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
+                        overlays[i].color = c;
+                        boughtThisRound = true;
+                    }
+                    else if (cardIndex == 2 && p.money >= 200)
+                    {
+                        p.money -= 200;
+                        moneyText.text = "Money: " + p.money;
+                        p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
+                        overlays[i].color = c;
+                        boughtThisRound = true;
+                    }
+                    
                 }
             }
-            boughtThisRound[cardIndex] = true;
+            
         }
+    }
+    public void UpdateTimerText(int timeLeft)
+    {
+        timerText.text = timeLeft.ToString();
     }
 }

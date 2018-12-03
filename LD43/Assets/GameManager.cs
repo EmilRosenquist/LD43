@@ -63,6 +63,7 @@ public class GameManager : NetworkBehaviour
             {
                 if (buyTimer != null)
                     buyTimer.tick(Time.time - prevTime);
+                CmdBuyTimeText();
             }
             if(currentState == states.WINGAME)
             {
@@ -124,6 +125,16 @@ public class GameManager : NetworkBehaviour
 
             yield return new WaitForSeconds(1);
         }
+    }
+    [Command]
+    public void CmdBuyTimeText()
+    {
+        RpcBuyTimeText(Mathf.CeilToInt(buyTimer.Time));
+    }
+    [ClientRpc]
+    public void RpcBuyTimeText(int timeLeft)
+    {
+        FindObjectOfType<PerkShop>().UpdateTimerText(timeLeft);
     }
 
     [ClientRpc]
