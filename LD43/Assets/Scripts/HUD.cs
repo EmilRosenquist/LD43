@@ -126,14 +126,17 @@ public class HUD : MonoBehaviour {
                 ammoText.text = loadedAmmo + "/" + reserveAmmo;
 
             health = player.health;
+
+            if (health < 0)
+                health = 0;
+
             healthText.text = health.ToString();
 
 
             PerksUpdate();
 
             ImageUpdate();
-
-            CheckUpdates();
+            
         }
         else
         {
@@ -173,14 +176,11 @@ public class HUD : MonoBehaviour {
     {
         if (CheckHealthMultiplier() != null)
         {
-            Debug.Log("1");
             for (int i = 0; i < perksImages.Count; i++)
             {
-                Debug.Log("2");
 
                 if (perksImages[i].sprite == null && !imageAdded1)
                 {
-                    Debug.Log("3");
                     imageAdded1 = true;
                     perksImages[i].sprite = CheckHealthMultiplier();
 
@@ -359,59 +359,34 @@ public class HUD : MonoBehaviour {
         }
     }
 
-    private void CheckUpdates()
-    {
-
-    }
     private Sprite CheckHealthMultiplier()
     {
-        if (playerStats.healthMultiplier != 1)
-        {
-            healthMultiplier = playerStats.healthMultiplier * 100;
-            return healthSprite;
-        }
-        return null;
+        healthMultiplier = playerStats.healthMultiplier * 100;
+        return healthSprite;
     }
 
 
     private Sprite CheckDamageMultiplier()
     {
-        if (playerStats.damageMultiplierMultiplier != 1)
-        {
-            damageMultiplier = playerStats.damageMultiplierMultiplier * 100;
-            return damageSprite;
-        }
-        return null;
+        damageMultiplier = playerStats.damageMultiplierMultiplier * 100;
+        return damageSprite;
     }
 
     private Sprite CheckSpeedMultiplier()
     {
-        if (playerStats.speedMultiplier != 1)
-        {
-        Debug.Log("here");
-            speedMultiplier = playerStats.speedMultiplier * 100;
-            return speedSprite;
-        }
-        return null;
+       speedMultiplier = playerStats.speedMultiplier * 100;
+       return speedSprite;
     }
 
     private Sprite CheckSprintMultiplier()
     {
-        if (playerStats.sprintMultiplier != 1)
-        {
-            sprintMultiplier = playerStats.sprintMultiplier * 100;
-            return sprintSprite;
-        }
-        return null;
+        sprintMultiplier = playerStats.sprintMultiplier * 100;
+        return sprintSprite;
     }
 
     private Sprite CheckJumpHeightMultiplier()
     {
-        if (playerStats.jumpHeightMultiplier != 1)
-        {
-            jumpHeightMultiplier = playerStats.jumpHeightMultiplier * 100;
-            return jumpHeightSprite;
-        }
-        return null;
+        jumpHeightMultiplier = playerStats.jumpHeightMultiplier * 100;
+        return jumpHeightSprite;
     }
 }
