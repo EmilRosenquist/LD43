@@ -24,7 +24,7 @@ public class RailGun : Wepond {
                     RaycastHit hit;
                     if (Physics.Raycast(player.playerCamera.transform.position, player.playerCamera.transform.forward, out hit, 150.0f))
                     {
-                        player.CmdSpawnRail(1, spawnPos, hit.point);
+                        player.CmdSpawnRail(1, spawnPos, hit.collider.transform.position);
                     }
                     else
                     {
