@@ -58,11 +58,12 @@ public class Player : NetworkBehaviour{
     void Start() { 
         ids = new List<int>();
          
-        CmdChangeName(FindObjectOfType<CharacterSelect>().PlayerName);
         if (!isLocalPlayer){
             OnChangeSkin(skinIndex);
             return;
         }
+        
+        CmdChangeName(FindObjectOfType<CharacterSelect>().PlayerName);
         SkinnedMeshRenderer[] tmp = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (SkinnedMeshRenderer s in tmp)
         {
@@ -204,7 +205,10 @@ public class Player : NetworkBehaviour{
     }
     void OnChangeSkin(int skinIndex)
     {
-        smr.material.mainTexture = skins[skinIndex];
+        if(!smr)
+            smr = GetComponentInChildren<SkinnedMeshRenderer>();
+        else
+            smr.material.mainTexture = skins[skinIndex];
     }
 
     [Command]
@@ -218,7 +222,7 @@ public class Player : NetworkBehaviour{
             return;
         transform.GetChild(0).gameObject.SetActive(toggle);
         GetComponent<CharacterController>().enabled = toggle;
-        smr.enabled = toggle;
+        //smr.enabled = toggle;
         weaponHolder.GetChild(weaponId).gameObject.SetActive(toggle);
     }
     [Command]

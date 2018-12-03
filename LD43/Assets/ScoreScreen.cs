@@ -48,6 +48,10 @@ public class ScoreScreen : MonoBehaviour {
                 }
             }
         }
+        else
+        {
+            gm = FindObjectOfType<GameManager>();
+        }
 	}
 
 }
