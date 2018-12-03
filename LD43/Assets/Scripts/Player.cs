@@ -52,7 +52,8 @@ public class Player : NetworkBehaviour{
     private void Awake()
     {
         smr = GetComponentInChildren<SkinnedMeshRenderer>();
-        playerStats = gameObject.AddComponent<PlayerStats>();
+        if(isLocalPlayer)
+            playerStats = gameObject.AddComponent<PlayerStats>();
     }
 
     void Start() { 
