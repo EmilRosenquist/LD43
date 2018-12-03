@@ -16,6 +16,7 @@ public class GrenadeProjectile : MonoBehaviour {
         }
         ParticleSystem explosion;
         explosion = Instantiate(grenadeExplosionPrefab, transform.position, transform.rotation) as ParticleSystem;
+        explosion.gameObject.GetComponent<GrenadeExplosion>().SetShooter(shooter);
 
         Destroy(gameObject);
     }

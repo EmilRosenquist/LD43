@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrenadeExplosion : MonoBehaviour {
 
 
+    private Player shooter;
     public ParticleSystem explosion;
     public float radius;
     public int damage = 30;
@@ -19,10 +20,15 @@ public class GrenadeExplosion : MonoBehaviour {
 		
 	}
 	
+    public void SetShooter(Player shooter)
+    {
+        this.shooter = shooter;
+    }
 	// Update is called once per frame
 	void Update ()
     {
-        ExplosionDamage();
+        if(this.shooter)
+            ExplosionDamage();
 
         if (explosion.isPlaying)
             gameObject.SetActive(true);
@@ -48,6 +54,7 @@ public class GrenadeExplosion : MonoBehaviour {
                 if (!players.Contains(p))
                 {
                     p.TakeDamage(damage);
+                    shooter.DidDamage(damage);
                     players.Add(p);
                 }
             }
