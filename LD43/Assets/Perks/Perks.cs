@@ -28,8 +28,7 @@ public class Perks : NetworkBehaviour{
         badAbilities.Add(tierTwoBadAbilites);
         badAbilities.Add(tierThreeBadAbilites);
     }
-    [Command]
-    public PerkStruct CmdGeneratePerk(int tier){
+    public PerkStruct GeneratePerk(int tier){
         PerkStruct ps = new PerkStruct();
         if (tier == -1){
             int goodTier = Random.Range(0, 3);

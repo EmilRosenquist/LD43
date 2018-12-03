@@ -78,9 +78,6 @@ public class Player : NetworkBehaviour{
             if (i != 0)
                 g.SetActive(false);
         }
-        Perk p = Perks.GeneratePerk(1);
-        ApplyPerk(p);
-
         OnChangeWeapon(weaponId);
         CmdResetStats();
 
