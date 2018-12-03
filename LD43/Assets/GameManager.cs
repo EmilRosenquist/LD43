@@ -90,10 +90,13 @@ public class GameManager : NetworkBehaviour
 
             if (currentState == states.BUYTIME && buyTimer.Time <= 0)
             {
+                if(isServer)
+                {
+                    RpctoggleCursor(false);
+                }
                 CmdHideBuyWindow();
                 currentState = states.PREGAME;
                 buyTimer.reset();
-
             }
 
             if(currentState == states.WINGAME && winTimer.Time <= 0)
@@ -103,6 +106,10 @@ public class GameManager : NetworkBehaviour
 
             if (currentState == states.ENDGAME)
             {
+                if(isServer)
+                {
+                    RpctoggleCursor(true);
+                }
                 CmdGenerateCards();
                 currentState = states.BUYTIME;
                 buyTimer = new Timer(buyTime);
@@ -119,7 +126,19 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-
+    [ClientRpc]
+    private void RpctoggleCursor(bool b)
+    {
+        if (b)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        Cursor.visible = b;
+    }
 
     public void updateLists()
     {

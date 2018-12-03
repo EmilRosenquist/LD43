@@ -19,12 +19,12 @@ public class CameraMouseLook : MonoBehaviour {
 
 	void Start ()
     {
-        character = this.transform.parent.gameObject;       
+        character = this.transform.parent.gameObject;
+        SetCursorState();
     }
 	
 	void Update ()
     {
-        SetCursorState();
 
 
 		Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")); //mus-input
