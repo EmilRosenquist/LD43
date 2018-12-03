@@ -184,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocity: 0
   dmg: 101
+  shooter: {fileID: 0}
 --- !u!114 &114980745753780450
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,6 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa9dc9e031de3446a378f6d6d4528c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundEmmiter: {fileID: 1463607624107240, guid: 643ca9345f32f034383d22c27d20fb1b,
+    type: 2}
+  sound: {fileID: 8300000, guid: ca848c9996ab5db418366e13cb64d2e8, type: 3}
 --- !u!120 &120836244963180652
 LineRenderer:
   m_ObjectHideFlags: 1

@@ -9,6 +9,7 @@ public class CharacterSelect : MonoBehaviour {
     [SerializeField] private GameManager gm;
     [SerializeField] private InputField nameSelector;
     [SerializeField] private string playerName = "";
+    [SerializeField] private Camera lobbyCam;
     private int selectedSkin = 0;
     public int SelectedSkin
     {
@@ -30,6 +31,7 @@ public class CharacterSelect : MonoBehaviour {
         {
             if (gm.gameObject.activeInHierarchy)
             {
+                lobbyCam.gameObject.SetActive(false);
                 CharacterSelectUI.SetActive(false);
             }
         }
