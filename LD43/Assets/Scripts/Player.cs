@@ -8,8 +8,8 @@ public class Player : NetworkBehaviour{
     public List<GameObject> weaponPrefabs;
     public List<GameObject> bulletPrefabs;
     public List<Texture> skins;
-    public Transform weaponHolder;
     private Camera playerCamera;
+    private Transform weaponHolder;
     private SkinnedMeshRenderer smr;
     private PlayerStats playerStats;
 
@@ -59,6 +59,7 @@ public class Player : NetworkBehaviour{
             return;
         }
         maxHealth = baseHealth;
+        playerStats = gameObject.AddComponent<PlayerStats>();
         SkinnedMeshRenderer[] tmp = gameObject.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (SkinnedMeshRenderer s in tmp)
         {
@@ -70,16 +71,16 @@ public class Player : NetworkBehaviour{
         CmdChangeSkin(FindObjectOfType<CharacterSelect>().SelectedSkin);
         GameObject cameraObject = Instantiate(playerCameraPrefab, transform) as GameObject;
         playerCamera = cameraObject.GetComponent<Camera>();
-        playerStats = gameObject.AddComponent<PlayerStats>();
-
-        Perk p = Perks.GeneratePerk(1);
-        ApplyPerk(p);
+        weaponHolder = cameraObject.transform.GetChild(0).transform;
 
         for (int i = 0; i < weaponPrefabs.Count; i++){
             GameObject g = Instantiate(weaponPrefabs[i], weaponHolder);
-            g.SetActive(false);
+            if (i != 0)
+                g.SetActive(false);
         }
-        weaponHolder.GetChild(0).gameObject.SetActive(true);
+        Perk p = Perks.GeneratePerk(1);
+        ApplyPerk(p);
+
         OnChangeWeapon(weaponId);
         CmdResetStats();
 
@@ -100,7 +101,7 @@ public class Player : NetworkBehaviour{
         }
     }
     void Attack(){
-        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, weaponHolder.GetChild(weaponId).transform.position, playerCamera.transform.forward);
+        weaponHolder.GetComponentInChildren<Wepond>().Attack(this, weaponHolder.GetChild(weaponId).GetChild(0).transform.position, playerCamera.transform.forward);
     }
     public void TakeDamage(int damageAmount) {
         if (!isServer) {
@@ -170,9 +171,9 @@ public class Player : NetworkBehaviour{
         weaponId = newId;
     }
     void OnChangeWeapon(int weaponId){
-        weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
+        //weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
         this.weaponId = weaponId;
-        weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
+        //weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
     }
     [Command]
     void CmdChangeName(string newPlayerName)
@@ -211,6 +212,8 @@ public class Player : NetworkBehaviour{
     }
     [ClientRpc]
     void RpcResetStats(){
+        if (weaponHolder == null)
+            return;
         for (int i = 0; i < weaponHolder.childCount; i++){
             weaponHolder.GetChild(i).GetComponent<Wepond>().Reset();
         }
