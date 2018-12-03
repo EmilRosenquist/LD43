@@ -7,14 +7,16 @@ public class PerkShop : MonoBehaviour {
     public List<PerkStruct> currentPerks = new List<PerkStruct>();
     Perks perksHelper;
     [SerializeField] private GameObject perkCardsUI;
-    [SerializeField] private Text[] cardsOne;
-    [SerializeField] private Text[] cardsTwo;
+    [SerializeField] private Text[] cardZero;
+    [SerializeField] private Text[] cardRandom;
+    [SerializeField] private Text[] cardTwo;
     [SerializeField] private Text timerText;
     [SerializeField] private Text moneyText;
     [SerializeField] private List<Image> overlays;
     bool boughtThisRound = false;
+    int time = 10;
 
-    Color c = new Color(0, 0.8301887f, 0.01823294f, 0.5f);
+    Color c = new Color(1f, 0.5155591f, 0.5058824f, 0.5f);
 
     GameManager gm;
 
@@ -32,21 +34,23 @@ public class PerkShop : MonoBehaviour {
                 moneyText.text ="Money: " + gm.playerList[i].GetComponent<Player>().money;
             }
         }
+        timerText.text = "WAIT";
         perksHelper = perksClass;
         currentPerks.Add(t1);
         currentPerks.Add(tierR);
         currentPerks.Add(t2);
         //set texts
-        cardsOne[0].text = perksClass.GetPerkFromStruct(t1).good.GetAbilityString();
-        cardsOne[1].text = perksClass.GetPerkFromStruct(t1).bad.GetAbilityString();
-        cardsTwo[0].text = perksClass.GetPerkFromStruct(t2).good.GetAbilityString();
-        cardsTwo[1].text = perksClass.GetPerkFromStruct(t2).bad.GetAbilityString();
+        cardZero[0].text = perksClass.GetPerkFromStruct(t1).good.GetAbilityString();
+        cardZero[1].text = perksClass.GetPerkFromStruct(t1).bad.GetAbilityString();
+        cardTwo[0].text = perksClass.GetPerkFromStruct(t2).good.GetAbilityString();
+        cardTwo[1].text = perksClass.GetPerkFromStruct(t2).bad.GetAbilityString();
         perkCardsUI.SetActive(true);
     }
 
     
     public void HideShop()
     {
+        time = 10;
         boughtThisRound = false;
         currentPerks.Clear();
         overlays[0].color = Color.clear;
@@ -54,6 +58,8 @@ public class PerkShop : MonoBehaviour {
         overlays[2].color = Color.clear;
         timerText.text = "";
         moneyText.text = "";
+        cardRandom[0].text = "";
+        cardRandom[1].text = "";
         perkCardsUI.SetActive(false);
     }
     public void BuyCard(int cardIndex)
@@ -67,31 +73,36 @@ public class PerkShop : MonoBehaviour {
                 {
                     Player p = gm.playerList[i].GetComponent<Player>();
                     //Buy Card
-                    if (cardIndex == 0 && p.money >= 100)
+                    if (time < 5)
                     {
-                        p.money -= 100;
-                        moneyText.text = "Money: " + p.money;
-                        p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
-                        overlays[i].color = c;
-                        boughtThisRound = true;
-                    }
-                    if (cardIndex == 1 && p.money >= 50)
-                    {
-                        p.money -= 50;
-                        moneyText.text = "Money: " + p.money;
-                        p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
-                        overlays[i].color = c;
-                        boughtThisRound = true;
-                    }
-                    if (cardIndex == 2 && p.money >= 200)
-                    {
-                        p.money -= 200;
-                        moneyText.text = "Money: " + p.money;
-                        p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[cardIndex]));
-                        overlays[i].color = c;
-                        boughtThisRound = true;
-                    }
-                    
+                        if (cardIndex == 0 && p.money >= 100)
+                        {
+                            p.money -= 100;
+                            moneyText.text = "Money: " + p.money;
+                            p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[0]));
+                            overlays[0].color = c;
+                            boughtThisRound = true;
+                        }
+                        if (cardIndex == 1 && p.money >= 50)
+                        {
+                            p.money -= 50;
+                            moneyText.text = "Money: " + p.money;
+                            p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[1]));
+                            overlays[1].color = c;
+                            boughtThisRound = true;
+                            cardRandom[0].text = FindObjectOfType<Perks>().GetPerkFromStruct(currentPerks[1]).good.GetAbilityString();
+                            cardRandom[1].text = FindObjectOfType<Perks>().GetPerkFromStruct(currentPerks[1]).bad.GetAbilityString();
+
+                        }
+                        if (cardIndex == 2 && p.money >= 200)
+                        {
+                            p.money -= 200;
+                            moneyText.text = "Money: " + p.money;
+                            p.ApplyPerk(perksHelper.GetPerkFromStruct(currentPerks[2]));
+                            overlays[2].color = c;
+                            boughtThisRound = true;
+                        }
+                    } 
                 }
             }
             
@@ -99,6 +110,25 @@ public class PerkShop : MonoBehaviour {
     }
     public void UpdateTimerText(int timeLeft)
     {
+        time = timeLeft;
         timerText.text = timeLeft.ToString();
+    }
+
+    public void SwapText( int cardIndex)
+    {
+        if (cardIndex == 0)
+        {
+            string text;
+            text = cardZero[0].text;
+            cardZero[0].text = cardZero[1].text;
+            cardZero[1].text = text;
+        }else if(cardIndex == 2)
+        {
+            string text;
+            text = cardZero[0].text;
+            cardTwo[0].text = cardTwo[1].text;
+            cardTwo[1].text = text;
+        }
+
     }
 }
