@@ -190,6 +190,7 @@ public class Player : NetworkBehaviour{
         if(newPlayerName == "" || newPlayerName == null)
         {
             playerName = "Player: " + netId.ToString();
+            return;
         }
         playerName = newPlayerName;
     }
@@ -222,6 +223,19 @@ public class Player : NetworkBehaviour{
     [Command]
     public void CmdAddWin(){
         wins += 1;
+    }
+    public void CompleteReset()
+    {
+        playerStats.Reset();
+        CmdCompleteReset();
+    }
+    [Command]
+    public void CmdCompleteReset()
+    {
+        maxHealth = baseHealth;
+        money = 0;
+        wins = 0;
+        damageDone = 0;
     }
     [ClientRpc]
     void RpcResetStats(){

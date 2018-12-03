@@ -11,14 +11,16 @@ public class GameManager : NetworkBehaviour
         PREGAME = 0,
         BUYTIME = 1,
         INGAME = 2,
-        ENDGAME = 3
-
+        ENDGAME = 3,
+        WINGAME = 4
     };
-
+    [SerializeField] private int rounds = 5;
+    [SerializeField] private float winTime;
     [SerializeField] private float buyTime;
     public List<GameObject> playerList = new List<GameObject>();
     public List<GameObject> aliveList = new List<GameObject>();
     private Timer buyTimer = new Timer(0);
+    private Timer winTimer = new Timer(0);
 
 
 
@@ -49,8 +51,8 @@ public class GameManager : NetworkBehaviour
 
         while (true)
         {
+            Debug.Log(currentState);
             updateLists();
-
             if (playerList.Count <= 1)
             {
                 currentState = states.PREGAME;
@@ -62,15 +64,21 @@ public class GameManager : NetworkBehaviour
                 if (buyTimer != null)
                     buyTimer.tick(Time.time - prevTime);
             }
+            if(currentState == states.WINGAME)
+            {
+                winTimer.tick(Time.time - prevTime);
+            }
 
             if (aliveList.Count < 2 && currentState == states.INGAME)
             {
                 currentState = states.ENDGAME;
-                if(isServer)
+                if (isServer){
                     aliveList[0].GetComponent<Player>().CmdAddWin();
-                //nextround
+                    if(aliveList[0].GetComponent<Player>().wins >= rounds){
+                        currentState = states.WINGAME;
+                    }
+                }
             }
-
 
             if (playerList.Count > 1 && currentState == states.PREGAME)
             {
@@ -88,11 +96,21 @@ public class GameManager : NetworkBehaviour
 
             }
 
+            if(currentState == states.WINGAME && winTimer.Time <= 0)
+            {
+                ResetGame();
+            }
+
             if (currentState == states.ENDGAME)
             {
                 CmdGenerateCards();
                 currentState = states.BUYTIME;
                 buyTimer = new Timer(buyTime);
+            }
+
+            if(currentState == states.WINGAME){
+                if(winTimer.Time <= 0)
+                    winTimer = new Timer(winTime);
             }
 
             prevTime = Time.time;
@@ -127,7 +145,6 @@ public class GameManager : NetworkBehaviour
         perks[2] = GetComponent<Perks>().GeneratePerk(2);
         RpcDistributeCards(perks);
     }
-
     [ClientRpc]
     public void RpcDistributeCards(PerkStruct[] perks)
     {
@@ -137,7 +154,20 @@ public class GameManager : NetworkBehaviour
         ps.ShowShop(GetComponent<Perks>(), perks[0], perks[1], perks[2]);
 
     }
-
+    public void ResetGame(){
+        if (isServer)
+            RpcResetClients();
+    }
+    [ClientRpc]
+    public void RpcResetClients(){
+        for (int i = 0; i < playerList.Count; i++){
+            if (playerList[i].GetComponent<Player>().isLocalPlayer)
+            {
+                playerList[i].GetComponent<Player>().CompleteReset();
+            }
+        }
+        currentState = states.PREGAME;
+    }
     [Command]
     public void CmdHideBuyWindow()
     {
