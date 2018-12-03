@@ -22,7 +22,7 @@ public class RailGun : Wepond {
                 {
                     anim.SetTrigger("Fire");
                     RaycastHit hit;
-                    if (Physics.Raycast(spawnPos, direction, out hit, 150.0f))
+                    if (Physics.Raycast(player.playerCamera.transform.position, player.playerCamera.transform.forward, out hit, 150.0f))
                     {
                         player.CmdSpawnRail(1, spawnPos, hit.point);
                     }
