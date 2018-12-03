@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour {
     public Player shooter;
     private bool isHit = false;
     private bool hasHit = false;
+    AudioSource audioSource;
 
     public Vector3 MoveDir
     {
