@@ -118,12 +118,18 @@ public class PerkShop : MonoBehaviour {
     {
         if (cardIndex == 0)
         {
+            Color c = cardZero[0].color;
+            cardZero[0].color = cardZero[1].color;
+            cardZero[1].color = c;
             string text;
             text = cardZero[0].text;
             cardZero[0].text = cardZero[1].text;
             cardZero[1].text = text;
         }else if(cardIndex == 2)
         {
+            Color c = cardTwo[0].color;
+            cardTwo[0].color = cardTwo[1].color;
+            cardTwo[1].color = c;
             string text;
             text = cardTwo[0].text;
             cardTwo[0].text = cardTwo[1].text;
