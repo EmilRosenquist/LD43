@@ -8,8 +8,6 @@ public class AutoRifle : Wepond
     [SerializeField] private int extraAmmo = 90;
     [SerializeField] private float timeBetweenShots = 0.05f;
     [SerializeField] private float timeToReload = 2.5f;
-    [SerializeField] private bool unlimitedAmmo = false;
-
 
     private bool reloading = false;
     private Timer shootTimer;
@@ -25,13 +23,13 @@ public class AutoRifle : Wepond
 
     private void Update()
     {
-        if (reloading) reloadTimer.tick(Time.deltaTime);
-        if (reloadTimer.Time < 0)
+        if(GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsTag("MiddleState"))
         {
             reloading = false;
-            reloadTimer.reset();
-            ReloadAmmo();
         }
+
+
+        Debug.Log(reloading);
         shootTimer.tick(Time.deltaTime);
     }
 
@@ -43,13 +41,15 @@ public class AutoRifle : Wepond
             {
                 if (loadedAmmo > 0)
                 {
+                    GetComponent<Animator>().SetTrigger("Fire");
                     loadedAmmo--;
+                    GetComponent<Animator>().SetInteger("Bullets", loadedAmmo);
                     player.CmdSpawnBullet(0, spawnPos, direction);
                     shootTimer.reset();
                 }
                 else
                 {
-                    StartReload();
+                    ReloadAmmo();
                 }
             }
         }
@@ -57,41 +57,25 @@ public class AutoRifle : Wepond
 
     public override bool ReloadAmmo()
     {
-        if (!unlimitedAmmo)
+        if(reserveAmmo > 0 && !reloading)
         {
-            if (reserveAmmo > 0)
-            {
-                //play anim and reload gun after x time
-                if (reserveAmmo > maxLoadedAmmo)
-                {
-                    reserveAmmo -= maxLoadedAmmo;
-                    loadedAmmo = maxLoadedAmmo;
-                    Debug.Log("Reserve Ammo: " + reserveAmmo);
-                }
-                else
-                {
-                    loadedAmmo = reserveAmmo;
-                    reserveAmmo = 0;
-                    Debug.Log("Reserve Ammo: " + reserveAmmo);
-                }
-                return true;
-            }
-            else
-            {
-                //out of ammo
-                return false;
-            }
-
+            reloading = true;
+            GetComponent<Animator>().SetTrigger("Reload");
+            GetComponent<Animator>().ResetTrigger("Fire");
+            reserveAmmo -= (maxLoadedAmmo - loadedAmmo);
+            loadedAmmo = maxLoadedAmmo;
+            reserveAmmo = Mathf.Clamp(reserveAmmo, 0, extraAmmo);
+            GetComponent<Animator>().SetInteger("Bullets", maxLoadedAmmo);
+            return true;
         }
-        loadedAmmo = maxLoadedAmmo;
-        return true;
+        else
+        {
+            GetComponent<Animator>().SetTrigger("OutOfAmmo");
+            return false;
+        }
+
     }
 
-    public void StartReload()
-    {
-        reloadTimer.reset();
-        reloading = true;
-    }
 
     public override int CheckMagasine()
     {
