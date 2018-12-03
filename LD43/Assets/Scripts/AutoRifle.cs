@@ -28,8 +28,6 @@ public class AutoRifle : Wepond
             reloading = false;
         }
 
-
-        Debug.Log(reloading);
         shootTimer.tick(Time.deltaTime);
     }
 
