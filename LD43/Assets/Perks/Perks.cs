@@ -1,18 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Perks : MonoBehaviour{
-    private static List<List<Ability>> goodAbilities;
-    private static List<List<Ability>> badAbilities;
-    private static List<Ability> tierOneGoodAbilites = new List<Ability>();
-    private static List<Ability> tierOneBadAbilites = new List<Ability>();
+public class Perks : NetworkBehaviour{
+    private List<List<Ability>> goodAbilities;
+    private List<List<Ability>> badAbilities;
+    private List<Ability> tierOneGoodAbilites = new List<Ability>();
+    private List<Ability> tierOneBadAbilites = new List<Ability>();
 
-    private static List<Ability> tierTwoGoodAbilites = new List<Ability>();
-    private static List<Ability> tierTwoBadAbilites = new List<Ability>();
+    private List<Ability> tierTwoGoodAbilites = new List<Ability>();
+    private List<Ability> tierTwoBadAbilites = new List<Ability>();
 
-    private static List<Ability> tierThreeGoodAbilites = new List<Ability>();
-    private static List<Ability> tierThreeBadAbilites = new List<Ability>();
+    private List<Ability> tierThreeGoodAbilites = new List<Ability>();
+    private List<Ability> tierThreeBadAbilites = new List<Ability>();
     void Awake(){
         FillTierOneGoodAbilities();
         FillTierOneBadAbilities();
@@ -27,27 +28,38 @@ public class Perks : MonoBehaviour{
         badAbilities.Add(tierTwoBadAbilites);
         badAbilities.Add(tierThreeBadAbilites);
     }
-    public static Perk GeneratePerk(int tier){
-        Ability good;
-        Ability bad;
-        if(tier == -1){
+    [Command]
+    public PerkStruct CmdGeneratePerk(int tier){
+        PerkStruct ps = new PerkStruct();
+        if (tier == -1){
             int goodTier = Random.Range(0, 3);
-            good = goodAbilities[goodTier][Random.Range(0, goodAbilities[goodTier].Count)];
             int badTier = Random.Range(0, 3);
-            bad = badAbilities[badTier][Random.Range(0, badAbilities[badTier].Count)];
-            return new Perk(good, bad);
+            ps.goodTier = goodTier;
+            ps.badTier = badTier;
+            ps.goodIndex = Random.Range(0, goodAbilities[goodTier].Count);
+            ps.badIndex = Random.Range(0, badAbilities[badTier].Count);
+            return ps;
         }
         if(tier == 1){
-            good = tierOneGoodAbilites[Random.Range(0, tierOneGoodAbilites.Count)];
-            bad = tierOneBadAbilites[Random.Range(0, tierOneBadAbilites.Count)];
-            return new Perk(good, bad);
+            ps.goodTier = ps.badTier = 1;
+            ps.goodIndex = Random.Range(0, tierOneGoodAbilites.Count);
+            ps.badIndex = Random.Range(0, tierOneBadAbilites.Count);
+            return ps;
         }
         if(tier == 2){
-            good = tierTwoGoodAbilites[Random.Range(0, tierTwoGoodAbilites.Count)];
-            bad = tierTwoBadAbilites[Random.Range(0, tierTwoBadAbilites.Count)];
-            return new Perk(good, bad);
+            ps.goodTier = ps.badTier = 2;
+            ps.goodIndex = Random.Range(0, tierTwoGoodAbilites.Count);
+            ps.badIndex = Random.Range(0, tierTwoBadAbilites.Count);
+            return ps;
         }
-        return null;
+        return ps;
+    }
+    public Perk GetPerkFromStruct(PerkStruct ps){
+        Ability good;
+        Ability bad;
+        good = goodAbilities[ps.goodTier][ps.goodIndex];
+        bad = badAbilities[ps.badTier][ps.badIndex];
+        return new Perk(good, bad);
     }
     private void FillTierOneGoodAbilities(){
         tierOneGoodAbilites.Add(new HealthStatAbility(1.2f));
@@ -96,3 +108,9 @@ public class Perks : MonoBehaviour{
         tierThreeBadAbilites.Add(new DamageMultiplierAbility(0.2f));
     }
 }
+public struct PerkStruct{
+    public int goodTier;
+    public int goodIndex;
+    public int badTier;
+    public int badIndex;
+};
