@@ -22,7 +22,7 @@ public class GameManager : NetworkBehaviour
     private Timer buyTimer = new Timer(0);
     private Timer winTimer = new Timer(0);
 
-
+    [SerializeField] private GameObject ConnectUI;
 
     [SyncVar]
     public states currentState = states.PREGAME;
@@ -34,7 +34,9 @@ public class GameManager : NetworkBehaviour
     private void Start()
     {
         StartCoroutine(updateState());
-        
+        ConnectUI.SetActive(false);
+
+
     }
     private void Update()
     {

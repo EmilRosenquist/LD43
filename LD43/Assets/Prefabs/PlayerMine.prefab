@@ -697,6 +697,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234809fbfbe457b4da894cecbb0a2841, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Pistol:
+    shake: 0
+    duration: 0
+    strenght: 0
+    speed: 0
+  RocketLauncher:
+    shake: 0
+    duration: 0
+    strenght: 0
+    speed: 0
+  Explosion:
+    shake: 0
+    duration: 0
+    strenght: 0
+    speed: 0
   shakeScreen: 0
   pistolShake: 0
   rocketLauncherShake: 0
