@@ -14,6 +14,8 @@ public class Grenade : Wepond {
 
     void OnEnable()
     {
+        reserveAmmo = numberOfGrenades;
+        loadedAmmo = (numberOfGrenades - grenadesThrown > 0) ? 1 : 0; 
         GetComponent<Animator>().SetInteger("numberOfNades", numberOfGrenades - grenadesThrown);
     }
 
@@ -34,6 +36,7 @@ public class Grenade : Wepond {
                 }
                 grenadeReleased = false;
                 grenadesThrown++;
+                reserveAmmo = numberOfGrenades;
                 anim.SetInteger("numberOfNades", numberOfGrenades - grenadesThrown);
             }
         }
@@ -42,6 +45,8 @@ public class Grenade : Wepond {
     IEnumerator SpawnNade(Player player, Vector3 spawnPos, Vector3 direction){
         yield return new WaitForSeconds(1f);
         player.CmdSpawnGranade(2, transform.GetChild(0).transform.position, transform.forward * force, transform.right * torque, transform.rotation);
+        yield return new WaitForSeconds(0.2f);
+        loadedAmmo = (numberOfGrenades - grenadesThrown > 0) ? 1 : 0;
     }
 
     public override int CheckMagasine()
