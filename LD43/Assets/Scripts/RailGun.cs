@@ -22,13 +22,13 @@ public class RailGun : Wepond {
                 {
                     anim.SetTrigger("Fire");
                     RaycastHit hit;
-                    if (Physics.Raycast(spawnPos, direction * 15f, out hit))
+                    if (Physics.Raycast(spawnPos, direction, out hit, 150.0f))
                     {
                         player.CmdSpawnRail(1, spawnPos, hit.point);
                     }
                     else
                     {
-                        player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 15f);
+                        player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 150f);
 
                     }
                     timer.reset();
