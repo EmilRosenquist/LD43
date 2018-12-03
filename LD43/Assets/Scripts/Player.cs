@@ -263,7 +263,7 @@ public class Player : NetworkBehaviour{
         CmdUpdateMaxHealth(multiplier);
     }
     [Command]void CmdUpdateMaxHealth(float multiplier){
-        maxHealth = (int)(baseHealth * multiplier);
+        maxHealth = (((int)(baseHealth * multiplier)) > 1) ? (int)(baseHealth * multiplier) : 1;
     }
     //Damage
     public void AddToDamageMultiplierMultiplier(float multiplier){
@@ -271,7 +271,7 @@ public class Player : NetworkBehaviour{
         CmdUpdateDamageMultiplier(playerStats.damageMultiplierMultiplier);
     }
     [Command]void CmdUpdateDamageMultiplier(float multiplier){
-        damageMultiplier = 1.0f * multiplier;
+        damageMultiplier = (1.0f * multiplier > 1) ? 1.0f * multiplier : 1;
     }
     //Speed
     public void AddToSpeedMultiplier(float multiplier){
@@ -279,7 +279,7 @@ public class Player : NetworkBehaviour{
         CmdUpdateSpeedMultiplier(multiplier);
     }
     [Command]void CmdUpdateSpeedMultiplier(float multiplier){
-        speed = baseSpeed * multiplier;
+        speed = (baseSpeed * multiplier > 0) ? baseSpeed * multiplier : 0;
     }
     //Sprint
     public void AddToSprintMultiplier(float multiplier){
@@ -287,7 +287,7 @@ public class Player : NetworkBehaviour{
         CmdUpdateSprintMultiplier(playerStats.sprintMultiplier);
     }
     [Command]void CmdUpdateSprintMultiplier(float multiplier){
-        sprintMultiplier = baseSprintMultiplier * multiplier;
+        sprintMultiplier = (baseSprintMultiplier * multiplier > 1) ? baseSprintMultiplier * multiplier : 1;
     }
     //Jump
     public void AddToJumpHeightMultiplier(float multiplier){
@@ -295,6 +295,6 @@ public class Player : NetworkBehaviour{
         CmdUpdateJumpHeightMultiplier(playerStats.jumpHeightMultiplier);
     }
     [Command]void CmdUpdateJumpHeightMultiplier(float multiplier){
-        jumpHeight = baseJumpHeight * multiplier;
+        jumpHeight = (baseJumpHeight * multiplier > 0) ? baseJumpHeight * multiplier : 0;
     }
 }

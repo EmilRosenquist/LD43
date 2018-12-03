@@ -40,15 +40,15 @@ public class Perks : NetworkBehaviour{
             return ps;
         }
         if(tier == 1){
-            ps.goodTier = 1;
-            ps.badTier = 1;
+            ps.goodTier = 0;
+            ps.badTier = 0;
             ps.goodIndex = Random.Range(0, tierOneGoodAbilites.Count);
             ps.badIndex = Random.Range(0, tierOneBadAbilites.Count);
             return ps;
         }
         if(tier == 2){
-            ps.goodTier = 2;
-            ps.badTier = 2;
+            ps.goodTier = 1;
+            ps.badTier = 1;
             ps.goodIndex = Random.Range(0, tierTwoGoodAbilites.Count);
             ps.badIndex = Random.Range(0, tierTwoBadAbilites.Count);
             return ps;
@@ -68,6 +68,11 @@ public class Perks : NetworkBehaviour{
         tierOneGoodAbilites.Add(new SprintStatAbility(1.2f));
         tierOneGoodAbilites.Add(new JumpHeightStatAbility(1.5f));
         tierOneGoodAbilites.Add(new DamageMultiplierAbility(1.2f));
+        tierOneGoodAbilites.Add(new HealthStatAbility(1.1f));
+        tierOneGoodAbilites.Add(new SpeedStatAbility(1.1f));
+        tierOneGoodAbilites.Add(new SprintStatAbility(1.1f));
+        tierOneGoodAbilites.Add(new JumpHeightStatAbility(1.25f));
+        tierOneGoodAbilites.Add(new DamageMultiplierAbility(1.1f));
     }
     private void FillTierOneBadAbilities(){
         tierOneBadAbilites.Add(new HealthStatAbility(0.8f));
@@ -75,6 +80,11 @@ public class Perks : NetworkBehaviour{
         tierOneBadAbilites.Add(new SprintStatAbility(0.8f));
         tierOneBadAbilites.Add(new JumpHeightStatAbility(0.5f));
         tierOneBadAbilites.Add(new DamageMultiplierAbility(0.8f));
+        tierOneBadAbilites.Add(new HealthStatAbility(0.9f));
+        tierOneBadAbilites.Add(new SpeedStatAbility(0.9f));
+        tierOneBadAbilites.Add(new SprintStatAbility(0.9f));
+        tierOneBadAbilites.Add(new JumpHeightStatAbility(0.75f));
+        tierOneBadAbilites.Add(new DamageMultiplierAbility(0.9f));
     }
     private void FillTierTwoGoodAbilities()
     {
