@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4137555675343374}
   - component: {fileID: 33445638388337652}
   - component: {fileID: 23431607765497922}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: mesh_bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 135361387694036972}
   - component: {fileID: 114331809744071710}
   - component: {fileID: 54581493382349102}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: projectile_bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 4091575322587534}
   - component: {fileID: 114942118615509330}
   - component: {fileID: 114585538662405678}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: BulletAutoRifle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
