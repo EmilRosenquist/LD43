@@ -44,7 +44,7 @@ public class AutoRifle : Wepond
                     GetComponent<Animator>().SetTrigger("Fire");
                     loadedAmmo--;
                     GetComponent<Animator>().SetInteger("Bullets", loadedAmmo);
-                    player.CmdSpawnBullet(0, spawnPos, direction);
+                    player.CmdSpawnBullet(3, spawnPos, direction);
                     shootTimer.reset();
                 }
                 else
