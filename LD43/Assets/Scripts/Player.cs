@@ -181,6 +181,8 @@ public class Player : NetworkBehaviour{
         weaponId = newId;
     }
     void OnChangeWeapon(int weaponId){
+        if (!isLocalPlayer)
+            return;
         weaponHolder.GetChild(this.weaponId).gameObject.SetActive(false);
         weaponHolder.GetChild(weaponId).gameObject.SetActive(true);
         GameObject.FindGameObjectWithTag("GUNS").GetComponentInChildren<SkinnedMeshRenderer>().material.mainTexture = skins[skinIndex];
@@ -212,10 +214,13 @@ public class Player : NetworkBehaviour{
     }
     [ClientRpc]
     void RpcToggleSpectatorMode(bool toggle){
+        if (!isLocalPlayer)
+            return;
         isAlive = toggle;
         transform.GetChild(0).gameObject.SetActive(toggle);
         GetComponent<CharacterController>().enabled = toggle;
         smr.enabled = toggle;
+        weaponHolder.GetChild(weaponId).gameObject.SetActive(toggle);
     }
     [Command]
     public void CmdResetStats(){
