@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class CrossHair : MonoBehaviour {
     [SerializeField] private GameManager gm;
-    [SerializeField] private GameObject crosshair;
-
+    [SerializeField] private GameObject hud;
+    private void Awake()
+    {
+        hud.SetActive(false);
+    }
     // Use this for initialization
     void Start () {
         if(!gm)
             gm = FindObjectOfType<GameManager>();
-        crosshair.SetActive(false);
+        hud.SetActive(false);
     }
 	
 	void Update () {
-        if (!crosshair.activeInHierarchy)
+        if (!hud.activeInHierarchy)
         {
             if (gm.gameObject.activeInHierarchy)
             {
-                crosshair.SetActive(true);
+                hud.GetComponent<HUD>().Setgm(gm);
+                hud.SetActive(true);
             }
         }
     }

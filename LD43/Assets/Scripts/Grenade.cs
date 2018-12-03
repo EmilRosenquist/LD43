@@ -14,7 +14,7 @@ public class Grenade : Wepond {
 
     void OnEnable()
     {
-        reserveAmmo = numberOfGrenades;
+        reserveAmmo = numberOfGrenades - grenadesThrown;
         loadedAmmo = (numberOfGrenades - grenadesThrown > 0) ? 1 : 0; 
         GetComponent<Animator>().SetInteger("numberOfNades", numberOfGrenades - grenadesThrown);
     }
@@ -36,7 +36,7 @@ public class Grenade : Wepond {
                 }
                 grenadeReleased = false;
                 grenadesThrown++;
-                reserveAmmo = numberOfGrenades;
+                reserveAmmo = numberOfGrenades - grenadesThrown;
                 anim.SetInteger("numberOfNades", numberOfGrenades - grenadesThrown);
             }
         }

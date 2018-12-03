@@ -10,6 +10,9 @@ public class GrenadeExplosion : MonoBehaviour {
     public float radius;
     public int damage = 30;
 
+    [SerializeField] private GameObject soundEmmiter;
+    [SerializeField] private AudioClip sound;
+
     private int nrRepeat = 1;
 
     List<Player> players = new List<Player>();
@@ -22,6 +25,9 @@ public class GrenadeExplosion : MonoBehaviour {
 	
     public void SetShooter(Player shooter)
     {
+        GameObject go = Instantiate(soundEmmiter, transform.position, Quaternion.identity);
+        go.GetComponent<AudioSource>().PlayOneShot(sound);
+        Destroy(go, 7f);
         this.shooter = shooter;
     }
 	// Update is called once per frame

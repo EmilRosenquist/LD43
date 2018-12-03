@@ -52,8 +52,7 @@ public class Player : NetworkBehaviour{
     private void Awake()
     {
         smr = GetComponentInChildren<SkinnedMeshRenderer>();
-        if(isLocalPlayer)
-            playerStats = gameObject.AddComponent<PlayerStats>();
+        playerStats = gameObject.AddComponent<PlayerStats>();
     }
 
     void Start() { 
@@ -94,18 +93,25 @@ public class Player : NetworkBehaviour{
         }
 
         if (isAlive){
-            if (Input.GetMouseButton(0)){
+            if (Input.GetMouseButton(0)) {
                 Attack();
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha1)){
+            else if (Input.GetKeyDown(KeyCode.Alpha1)) {
                 CmdChangeWeapon(0);
-            }else if (Input.GetKeyDown(KeyCode.Alpha2)){
-                if(weaponPrefabs.Count >= 2)
+            }else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+                if (weaponPrefabs.Count >= 2)
                     CmdChangeWeapon(1);
-            }else if (Input.GetKeyDown(KeyCode.Alpha3)){
+            }else if (Input.GetKeyDown(KeyCode.Alpha3)) {
                 if (weaponPrefabs.Count >= 3)
                     CmdChangeWeapon(2);
-            }else if (Input.GetKeyDown(KeyCode.R)){
+            }else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+                if (weaponPrefabs.Count >= 4)
+                    CmdChangeWeapon(3);
+            }else if (Input.GetKeyDown(KeyCode.Alpha5)){
+                if (weaponPrefabs.Count >= 5)
+                    CmdChangeWeapon(4);
+            }
+            else if (Input.GetKeyDown(KeyCode.R)) {
                 weaponHolder.GetChild(weaponId).GetComponentInChildren<Wepond>().ReloadAmmo();
             }
         }

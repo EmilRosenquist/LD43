@@ -6,10 +6,15 @@ public class RailBullet : MonoBehaviour {
     Vector3[] poses = new Vector3[2];
     LineRenderer lr;
     float liveTime = 0.2f;
+    [SerializeField] private GameObject soundEmmiter;
+    [SerializeField] private AudioClip sound;
     public void setPositions(Vector3 start, Vector3 end)
     {
         poses[0] = start;
         poses[1] = end;
+        GameObject go = Instantiate(soundEmmiter, start, Quaternion.identity);
+        go.GetComponent<AudioSource>().PlayOneShot(sound);
+        Destroy(go, 7f);
     }
 
     
