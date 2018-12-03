@@ -4746,13 +4746,14 @@ MonoBehaviour:
   playerCameraPrefab: {fileID: 1247865985724976, guid: a8cfd89f982d47940ac4cac4b183dad0,
     type: 2}
   weaponPrefabs:
-  - {fileID: 1910044568627142, guid: be4b7e3334329ff4dace4ea39ce7a5f6, type: 2}
+  - {fileID: 1410418614016956, guid: 67eedc0b8ce1c8745b94a67d9fd2aaa1, type: 2}
   - {fileID: 1678361613307080, guid: aa8c9faedf8cef043ae306751bc609ae, type: 2}
   - {fileID: 1788155410688512, guid: 71af87a55cae1b245b1a96355fa56cbb, type: 2}
   bulletPrefabs:
   - {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027, type: 2}
   - {fileID: 1912327147758926, guid: 90cad53e30ef7354681cc9d9c318fec1, type: 2}
   - {fileID: 1594363238387888, guid: a9855ae08491b9c4c966ed5a53e599b3, type: 2}
+  - {fileID: 1746357233644340, guid: bbb3cc5381f7e3c449ec3a1a99e2bf93, type: 2}
   skins:
   - {fileID: 2800000, guid: ad8c779111767c34b9e2a33f8854375f, type: 3}
   - {fileID: 2800000, guid: 8f8b5039d32d69341bccb4111f374eea, type: 3}
