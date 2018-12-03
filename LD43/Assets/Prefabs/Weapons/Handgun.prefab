@@ -5000,7 +5000,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLoadedAmmo: 7
   extraAmmo: 21
-  unlimitedAmmo: 0
+  unlimitedAmmo: 1
   shootSpeed: 0.3
   reloadSpeed: 1
 --- !u!137 &137089894692363810
