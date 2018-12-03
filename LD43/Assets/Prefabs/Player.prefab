@@ -4747,7 +4747,8 @@ MonoBehaviour:
     type: 2}
   weaponPrefabs:
   - {fileID: 1752092578494808, guid: e913cec5634d6cf4c80c2506650e3e4a, type: 2}
-  - {fileID: 1671103055047854, guid: 900cc7c82a590a24a83958a7b702916f, type: 2}
+  - {fileID: 0}
+  - {fileID: 1074221192535398, guid: 47fc79f0bf69c664aaef85c514a9cd2e, type: 2}
   bulletPrefabs:
   - {fileID: 1746357233644340, guid: 256ff84bdd02ad64091183ab92079027, type: 2}
   - {fileID: 1912327147758926, guid: 90cad53e30ef7354681cc9d9c318fec1, type: 2}

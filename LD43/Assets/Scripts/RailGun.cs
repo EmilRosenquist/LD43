@@ -11,23 +11,29 @@ public class RailGun : Wepond {
 
     public override void Attack(Player player, Vector3 spawnPos, Vector3 direction)
     {
+
+        Animator anim = GetComponent<Animator>();
         if (timer.Time < 0)
         {
             Debug.Log(loadedAmmo);
             if (loadedAmmo > 0)
             {
-                RaycastHit hit;
-                if (Physics.Raycast(spawnPos, direction * 15f, out hit))
+                if(anim.GetCurrentAnimatorStateInfo(0).IsTag("Idle"))
                 {
-                    player.CmdSpawnRail(1, spawnPos, hit.point);
-                }
-                else
-                {
-                    player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 15f);
+                    anim.SetTrigger("Fire");
+                    RaycastHit hit;
+                    if (Physics.Raycast(spawnPos, direction * 15f, out hit))
+                    {
+                        player.CmdSpawnRail(1, spawnPos, hit.point);
+                    }
+                    else
+                    {
+                        player.CmdSpawnRail(1, spawnPos, spawnPos + direction * 15f);
 
+                    }
+                    timer.reset();
+                    loadedAmmo--;
                 }
-                timer.reset();
-                loadedAmmo--;
             }
         }
     }
