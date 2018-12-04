@@ -73,7 +73,7 @@ public class PerkShop : MonoBehaviour {
                 {
                     Player p = gm.playerList[i].GetComponent<Player>();
                     //Buy Card
-                    if (time < 5)
+                    if (time <= 5)
                     {
                         if (cardIndex == 0 && p.money >= 100)
                         {

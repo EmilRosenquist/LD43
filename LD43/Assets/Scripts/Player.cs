@@ -237,6 +237,7 @@ public class Player : NetworkBehaviour{
     [ClientRpc]
     void RpcToggleSpectatorMode(bool toggle){
         smr.enabled = toggle;
+        smr.gameObject.SetActive(toggle);
         if (!isLocalPlayer)
             return;
         transform.GetChild(0).gameObject.SetActive(toggle);
