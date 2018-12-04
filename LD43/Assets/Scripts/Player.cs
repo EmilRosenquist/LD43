@@ -295,7 +295,9 @@ public class Player : NetworkBehaviour{
         CmdUpdateMaxHealth(multiplier);
     }
     [Command]void CmdUpdateMaxHealth(float multiplier){
-        maxHealth = (((int)(baseHealth * multiplier)) > 1) ? (int)(baseHealth * multiplier) : 1;
+        if (maxHealth == 0)
+            maxHealth = baseHealth;
+        maxHealth = (((int)(maxHealth * multiplier)) > 1) ? (int)(maxHealth * multiplier) : 1;
     }
     //Damage
     public void AddToDamageMultiplierMultiplier(float multiplier){
